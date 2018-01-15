@@ -1,0 +1,27 @@
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.centered_wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.middle_centered_small {
+  max-width: 500px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
