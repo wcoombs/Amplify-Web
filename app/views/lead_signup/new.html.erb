@@ -1,0 +1,20 @@
+<div class="middle_centered_small full_width">
+  <div class="ui segment">
+    <% flash.each do |name, msg| %>
+      <% alert_class = ['success', 'notice'].include?(name) ? 'success' : 'error' %>
+      <div class="ui <%= alert_class %> message">
+        <p><%= msg.html_safe %></p>
+      </div>
+    <% end %>
+
+    <%= form_for @lead, url: { action: "create" }, html: { class: "ui form" } do |f| %>
+      <div class="field">
+        <%= f.label "email" %>
+        <%= f.text_field :email %>
+      </div>
+      <div class="field">
+        <%= f.submit "Sign me up", class: "ui positive button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
