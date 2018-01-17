@@ -22,6 +22,10 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Move secrets
+          command: mv config/secrets.ci.yml config/secrets.yml
+
       # Download and cache dependencies
       - restore_cache:
           keys:
