@@ -8,11 +8,13 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
+spec/examples.txt
+config/secrets.yml
+
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-spec/examples.txt
 /node_modules
 /yarn-error.log
 
