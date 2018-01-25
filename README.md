@@ -1,6 +1,6 @@
 # Amplify (WebAPI)
 
-[![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=svg&circle-token=030f03a14524c5530c203dc2c5f8b0d733389c2f)](https://circleci.com/gh/wcoombs/Amplify-Web)
+[![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=shield&circle-token=030f03a14524c5530c203dc2c5f8b0d733389c2f)](https://circleci.com/gh/wcoombs/Amplify-Web)
 
 # README
 
