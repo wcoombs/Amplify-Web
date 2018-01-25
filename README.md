@@ -1,7 +1,6 @@
 # Amplify (WebAPI)
 
-[![CircleCI
-status](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=svg)](https://circleci.com/gh/wcoombs/Amplify-Web)
+[![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=svg)](https://circleci.com/gh/wcoombs/Amplify-Web)
 
 # README
 
