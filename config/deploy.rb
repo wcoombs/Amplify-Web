@@ -31,7 +31,7 @@ set :branch, ENV['CAP_BRANCH'] || :master # eg: CAP_BRANCH=custom-branch cap san
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
@@ -46,12 +46,28 @@ namespace :puma do
   before :start, :make_dirs
 end
 
+
+Rake::Task["deploy:compile_assets"].clear
+
+# before "deploy:assets:precompile", "deploy:yarn_install"
+
+# namespace :deploy do
+#   desc 'Run rake yarn:install'
+#   task :yarn_install do
+#     on roles(:web) do
+#       within release_path do
+#         execute("cd #{release_path} && yarn install")
+#       end
+#     end
+#   end
+# end
+
 namespace :deploy do
-  desc "Make sure local git is in sync with remote."
+  desc 'Make sure local git is in sync with remote.'
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
+      unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+        puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
         puts "Run `git push` to sync changes."
         exit
       end
@@ -76,7 +92,6 @@ namespace :deploy do
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
 end
 
 # ps aux | grep puma    # Get puma pid
