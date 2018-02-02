@@ -21,7 +21,7 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
-set :puma_init_active_record, false  # Change to true if using ActiveRecord
+set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 ## Defaults:
 # set :scm,           :git
@@ -47,22 +47,14 @@ namespace :puma do
 end
 
 
+# Clearing out existing tasks, so we decide what's needed for asset compilation
 Rake::Task["deploy:compile_assets"].clear
 
-# before "deploy:assets:precompile", "deploy:yarn_install"
-
-# namespace :deploy do
-#   desc 'Run rake yarn:install'
-#   task :yarn_install do
-#     on roles(:web) do
-#       within release_path do
-#         execute("cd #{release_path} && yarn install")
-#       end
-#     end
-#   end
-# end
-
 namespace :deploy do
+  desc 'Compile assets'
+  task :compile_assets => [:set_rails_env] do
+    invoke 'deploy:assets:precompile_local'
+  end
 
   namespace :assets do
     desc "Precompile assets locally and then rsync to web servers"
@@ -71,13 +63,6 @@ namespace :deploy do
       run_locally do
         execute "RAILS_ENV=#{fetch(:stage)} bundle exec rake assets:precompile"
       end
-
-      local_dir = "./public/assets/"
-      on roles(fetch(:assets_roles, [:web])) do
-        remote_dir = "#{fetch(:user)}@#{host.hostname}:#{release_path}/public/assets/"
-        run_locally { execute "rsync -av --delete #{local_dir} #{remote_dir}" }
-      end
-      run_locally { execute "rm -rf #{local_dir}" }
 
       local_dir = "./public/packs/"
       on roles(fetch(:assets_roles, [:web])) do
