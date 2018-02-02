@@ -25,7 +25,7 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 ## Defaults:
 # set :scm,           :git
-set :branch, ENV['CAP_BRANCH'] || "configure-capistrano" # eg: CAP_BRANCH=custom-branch cap sandbox deploy (or for fish: begin; set -lx CAP_BRANCH cusomt-branch; cap sandbox deploy; end)
+set :branch, ENV['CAP_BRANCH'] || :master # example: CAP_BRANCH=branch-name cap staging deploy
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
