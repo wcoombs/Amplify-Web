@@ -25,7 +25,7 @@ set :puma_init_active_record, false  # Change to true if using ActiveRecord
 
 ## Defaults:
 # set :scm,           :git
-set :branch, ENV['CAP_BRANCH'] || :master # eg: CAP_BRANCH=custom-branch cap sandbox deploy (or for fish: begin; set -lx CAP_BRANCH cusomt-branch; cap sandbox deploy; end)
+set :branch, ENV['CAP_BRANCH'] || "configure-capistrano" # eg: CAP_BRANCH=custom-branch cap sandbox deploy (or for fish: begin; set -lx CAP_BRANCH cusomt-branch; cap sandbox deploy; end)
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
@@ -63,6 +63,31 @@ Rake::Task["deploy:compile_assets"].clear
 # end
 
 namespace :deploy do
+
+  namespace :assets do
+    desc "Precompile assets locally and then rsync to web servers"
+    task :precompile_local do
+      # compile assets locally
+      run_locally do
+        execute "RAILS_ENV=#{fetch(:stage)} bundle exec rake assets:precompile"
+      end
+
+      local_dir = "./public/assets/"
+      on roles(fetch(:assets_roles, [:web])) do
+        remote_dir = "#{fetch(:user)}@#{host.hostname}:#{release_path}/public/assets/"
+        run_locally { execute "rsync -av --delete #{local_dir} #{remote_dir}" }
+      end
+      run_locally { execute "rm -rf #{local_dir}" }
+
+      local_dir = "./public/packs/"
+      on roles(fetch(:assets_roles, [:web])) do
+        remote_dir = "#{fetch(:user)}@#{host.hostname}:#{release_path}/public/packs/"
+        run_locally { execute "rsync -av --delete #{local_dir} #{remote_dir}" }
+      end
+      run_locally { execute "rm -rf #{local_dir}" }
+    end
+  end
+
   desc 'Make sure local git is in sync with remote.'
   task :check_revision do
     on roles(:app) do
