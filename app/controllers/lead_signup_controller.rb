@@ -7,11 +7,8 @@ class LeadSignupController < ApplicationController
   def create
     params_hash = params.require(:lead).permit(:email, :referrer)
     new_lead = Lead.new(params_hash)
-    if new_lead.save
-      flash[:success] = "You will be notified when we launch."
-    else
-      flash[:error] = new_lead.errors.full_messages.join('<br>')
-    end
+    new_lead.save
+    flash[:notice] = "Thanks for signing up, you'll be the first to know when we launch!"
     redirect_to new_lead_signup_path
   end
 end
