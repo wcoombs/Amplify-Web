@@ -8,6 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 import $ from 'jquery';
 import "application.css";
+import "inverted-logo.svg";
 
 window.$ = $;
 window.jQuery = $;
