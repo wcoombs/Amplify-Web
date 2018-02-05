@@ -26,3 +26,25 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+### API Endpoint Reference
+
+##### Registration
+|  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
+| -------- | ---------- | ------- | ------------ |  -------- |
+| POST | /api/register | Register as Host | Anybody | `auth_token` |
+| POST | /api/register/`room_id` | Join a room | Anybody | `auth_token` |
+
+##### Rooms
+|  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
+| -------- | ---------- | ------- | ------------ |  -------- |
+| POST | /api/rooms/ | Create a room | Host | Room |
+| DELETE | /api/rooms/`room_id` | Destroy a room | Host | - |
+
+##### Playlists
+|  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
+| -------- | ---------- | ------- | ------------ |  -------- |
+| GET | /api/playlist/`room_id` | View playlist | Authenticated | Tracks |
+| POST | /api/playlist/`room_id`/`track_id` | Add a track | Host | Track |
+| PUT | /api/playlist/`room_id`/`track_id` | Vote on a track | Authenticated | Track |
+| DELETE | /api/playlist/`room_id`/`track_id` | Remove a track | Host | - |
