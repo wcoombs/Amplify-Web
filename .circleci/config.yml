@@ -36,12 +36,12 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      # - save_cache:
-      #     paths:
-      #       - ./vendor/bundle
-      #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - type: cache-restore
         name: Restore yarn cache
@@ -80,5 +80,6 @@ jobs:
           name: Deploy master
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              sudo apt install rsync
               cap production deploy
             fi
