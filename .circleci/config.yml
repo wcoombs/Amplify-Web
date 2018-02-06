@@ -75,3 +75,10 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+      - deploy:
+          name: Deploy master
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cap production deploy
+            fi
