@@ -76,6 +76,10 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
+      - add_ssh_keys:
+          fingerprints:
+            - "a0:0a:ce:34:85:6d:15:ed:85:f6:60:88:02:64:16:1d"
+
       - deploy:
           name: Maybe Deploy
           command: |
