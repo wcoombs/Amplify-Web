@@ -55,9 +55,37 @@
 }
 
 .amplify_blue {
-  color: rgb(2, 73, 109, 1) !important;
+  color: rgb(2, 73, 109) !important;
 }
 
 .amplify_color_background {
   background-color: #FF0F4C !important;
 }
+
+@media only screen and (min-width: 768px) {
+  .ui.button {
+    font-size: 2rem !important;
+  }
+
+  .ui.form {
+    font-size: 2rem !important;
+  }
+
+  .ui.massive.header {
+    font-size: 2rem;
+  }
+
+}
+
+.main_background {
+  background: #525254;
+  background-size: cover;
+  background-position: center top;
+  height: 100VH;
+}
+
+.padding_top_three {
+  padding-top: 3rem;
+}
+
+
