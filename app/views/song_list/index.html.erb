@@ -1,69 +1,30 @@
 <div class="main_background">
   <div class="overlay padding_top_three">
-    <div class="ui fixed inverted menu">
-      <div class="ui container">
-        <a href="#" class="header item">
-          <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
-          Amplify
-        </a>
-        <div class="header item">Playlist Title</div>
+    <h3 class="ui inverted top attached header">
+      <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
+      <div class="content">Amplify</div>
+    </h3>
+    <div class="ui inverted attached segment">
+      <div class="ui inverted relaxed divided list">
+        <!--Item will eventually be a song object, can do item.votes, item.artist, etc. -->
+        <% @songs.each do |item| %>
+        <div class="item">
+          <div class="left floated content">
+            <i class="triangle up icon"></i>42<i class="triangle down icon"></i>
+          </div>
+          <div class="content">
+            <div class="header"><%= item %></div>
+            blah blah
+          </div>
         </div>
-      </div>
-
-    <div class="ui left aligned stackable grid white_text">
-      <div class="row">
-        <div class="column">Hello</div>
-      </div>
-      <div class="row" style="font-size:1.5rem;">
-        <div class="overflow-x:auto;">
-        <table class="ui inverted celled">
-          <thead>
-            <tr>
-              <th>Votes</th>
-              <th>Song</th>
-              <th>Artist</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="center aligned">
-                <i class="arrow up icon"></i>301<i class="arrow down icon"></i>
-              </td>
-              <td>
-                All Star
-              </td>
-              <td>
-                Smash Mouth
-              </td>
-            </tr>
-            <tr>
-              <td class="center aligned">
-                <i class="arrow up icon"></i>12<i class="arrow down icon"></i>
-              </td>
-              <td>
-                Toxic
-              </td>
-              <td>
-                Britney Spears
-              </td>
-            </tr>
-            <tr>
-              <td class="center aligned">
-                <i class="arrow up icon"></i>-9<i class="arrow down icon"></i>
-              </td>
-              <td>
-                How You Remind Me
-              </td>
-              <td>
-                Nickelback
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-        </div>
+        <% end %>
       </div>
     </div>
+    <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+        <div class="content">Amplify 2018</div>
+    </div>
+  </div>
   </div>
 </div>
 
