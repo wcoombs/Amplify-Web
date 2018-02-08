@@ -1,4 +1,16 @@
 <% @songs.each do |song| %>
-    <%= song.title %>
-    <%= link_to song.title, '/playlist/1/vote/1', { method: :put } %>
+  <%= song.title %>
+
+  <%= form_tag(playlist_vote_path(song.room, song.id), { method: :put } ) do %>
+    <%= radio_button_tag(:vote, 1) %>
+    <%= label_tag(:vote, "upvote") %>
+
+    <%= radio_button_tag(:vote, 0) %>
+    <%= label_tag(:vote, "novote") %>
+
+    <%= radio_button_tag(:vote, -1) %>
+    <%= label_tag(:vote, "downvote  ") %>
+
+    <%= submit_tag "submit vote" %>
+  <% end %>
 <% end %>

@@ -8,6 +8,6 @@ class VoterSignupController < ApplicationController
 
     voter = Voter.create(room: room, nickname: params[:nickname])
     session[:voter_id] = voter.id
-    redirect_to room_path(room)
+    redirect_to playlist_path(room)
   end
 end
