@@ -75,10 +75,13 @@
     font-size: 2rem;
   }
 
+  .song_list {
+    font-size: 1.2rem !important;
+  }
 }
 
 .main_background {
-  background: #525254;
+  background: #4e494d;
   background-size: cover;
   background-position: center top;
   height: 100VH;
@@ -88,4 +91,7 @@
   padding-top: 3rem;
 }
 
-
+.padding_top_bottom_three {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}

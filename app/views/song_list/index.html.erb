@@ -1,11 +1,24 @@
 <div class="main_background">
-  <div class="overlay padding_top_three">
-    <h3 class="ui inverted top attached header">
-      <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
-      <div class="content">Amplify</div>
-    </h3>
-    <div class="ui inverted attached segment">
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+       <div class="header item">
+          <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
+          Amplify
+        </div>
+        <div class="header item">Playlist Title</div>
+    </div>
+  </div>
+  <div class="overlay padding_top_bottom_three">
+    <div class="ui inverted attached segment song_list">
       <div class="ui inverted relaxed divided list">
+        <div class="item">
+          <div class="left floated content">
+            Votes
+          </div>
+          <div class="content">
+            Song Title
+          </div>
+        </div>
         <!--Item will eventually be a song object, can do item.votes, item.artist, etc. -->
         <% @songs.each do |item| %>
         <div class="item">
@@ -14,17 +27,11 @@
           </div>
           <div class="content">
             <div class="header"><%= item %></div>
-            blah blah
           </div>
         </div>
         <% end %>
       </div>
     </div>
-    <div class="ui inverted vertical footer segment">
-    <div class="ui container">
-        <div class="content">Amplify 2018</div>
-    </div>
-  </div>
   </div>
 </div>
 
