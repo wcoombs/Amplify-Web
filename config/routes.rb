@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   root to: "lead_signup#new"
   resources :lead_signup, only: [:new, :create]
+  resources :voter_signup, only: [:new, :create]
+  resources :room, only: [:show]
 end

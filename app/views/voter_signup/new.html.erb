@@ -1,0 +1,13 @@
+<div class="centered_wrapper">
+<%= form_tag(voter_signup_index_path, { method: :post, class: "ui form" }) do |f| %>
+  <div class="field">
+    <%= text_field_tag :room_code, nil, placeholder: "room code!", required: true %>
+  </div>
+  <div class="field">
+    <%= text_field_tag :nickname, nil, placeholder: "your name!", reqired: true %>
+  </div>
+  <div class="field">
+    <%= submit_tag "Sign me up", class: "ui amplify_color_background white_text button" %>
+  </div>
+<% end %>
+</div
