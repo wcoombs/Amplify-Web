@@ -90,14 +90,10 @@ body {
   background: #303030 !important;
 }
 
-.padding_top_five {
-  padding-top: 5rem;
-}
-
 .ui.inverted {
   background: #303030 !important;
 }
 
 .song_list {
-  margin-top: 2rem;
+  margin-top: 4rem !important;
 }
