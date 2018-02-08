@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115165711) do
+ActiveRecord::Schema.define(version: 20180208002831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,38 @@ ActiveRecord::Schema.define(version: 20180115165711) do
     t.string "referrer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "room_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.bigint "room_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_songs_on_room_id"
+  end
+
+  create_table "voters", force: :cascade do |t|
+    t.bigint "room_id"
+    t.string "nickname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_voters_on_room_id"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.bigint "song_id"
+    t.bigint "voters_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_votes_on_song_id"
+    t.index ["voters_id"], name: "index_votes_on_voters_id"
   end
 
 end
