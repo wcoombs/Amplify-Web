@@ -18,5 +18,5 @@
 ##### Playlists
 |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
 | -------- | ---------- | ------- | ------------ |  -------- |
-| GET | /api/playlist/`room_id` | View playlist | Authenticated | Tracks |
-| PUT | /api/playlist/`room_id`/`track_id` | Vote on a track | Authenticated | Track |
+| GET | /api/playlist/`room_id` | View playlist | Authenticated | Songs |
+| PUT | /api/playlist/`room_id`/`song_id` | Vote on a song | Authenticated | Song |
