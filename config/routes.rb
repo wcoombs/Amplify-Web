@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   resources :lead_signup, only: [:new, :create]
   resources :voter_signup, only: [:new, :create]
   resources :room, only: [:show]
+  resources :playlist, only: [:show] do
+    resources :vote, only: [:update]
+  end
 end

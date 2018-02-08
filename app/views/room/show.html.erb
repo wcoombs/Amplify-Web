@@ -1,2 +1,3 @@
-Welcome to room <%= @songs.first  %>
-<%= session[:voter_id] %>
+<% @songs.each do |song| %>
+    <%= song.title %>
+<% end %>

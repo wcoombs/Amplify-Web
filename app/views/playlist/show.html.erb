@@ -1,0 +1,4 @@
+<% @songs.each do |song| %>
+    <%= song.title %>
+    <%= link_to song.title, '/playlist/1/vote/1', { method: :put } %>
+<% end %>
