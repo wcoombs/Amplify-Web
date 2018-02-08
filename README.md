@@ -14,7 +14,7 @@
   - Launch!
 
 
-### SSH into the new instance. [More Info](http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/)
+### Configuring access. [More Info](http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/)
   - create a deployment user
     - `adduser deploy`
     - `passwd -l deploy`
@@ -36,7 +36,7 @@
       - `ssh -A deploy@server-ip-here 'git ls-remote git-url-here'`
 
 
-### Start installing project dependencies. [More Info](https://coderwall.com/p/ttrhow/deploying-rails-app-using-nginx-puma-and-capistrano-3)
+### Project dependencies. [More Info](https://coderwall.com/p/ttrhow/deploying-rails-app-using-nginx-puma-and-capistrano-3)
   - install nginx
     - `sudo apt-get update`
     - `sudo apt-get install curl git-core nginx -y`
@@ -68,12 +68,12 @@
       - `\password pguser` # this password needs to be added to the database.yml file
       - `\q` to quit pg
 
-Setup configuration files
+### Add configuration files to the server
   - in /home/deploy/apps/amplify/shared/config
     - create/add a secrets.yml file
     - create/add a database.yml file
 
-Initial deploy
+### Initial deploy
   - `cap stage deploy` # will probably fail due to db not being created
   - need a better way of doing this but just jump in a recently created release and do
     - `bundle exec rake db:create RAILS_ENV=stage`
