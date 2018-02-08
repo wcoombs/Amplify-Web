@@ -75,23 +75,29 @@
     font-size: 2rem;
   }
 
-  .song_list {
+  .song_table {
     font-size: 1.2rem !important;
+    margin-left: 3rem !important;
+    margin-right: 3rem !important;
   }
 }
 
-.main_background {
-  background: #4e494d;
-  background-size: cover;
-  background-position: center top;
-  height: 100VH;
+html {
+  background: #303030 !important;
 }
 
-.padding_top_three {
-  padding-top: 3rem;
+body {
+  background: #303030 !important;
 }
 
-.padding_top_bottom_three {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+.padding_top_five {
+  padding-top: 5rem;
+}
+
+.ui.inverted {
+  background: #303030 !important;
+}
+
+.song_list {
+  margin-top: 2rem;
 }
