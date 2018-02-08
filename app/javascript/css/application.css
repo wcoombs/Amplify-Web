@@ -1,11 +1,3 @@
-.error {
-  color: red;
-}
-
-.success {
-  color: green;
-}
-
 .centered_wrapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -20,8 +12,52 @@
   justify-content: center;
 }
 
-.middle_centered_small {
-  max-width: 500px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+.max_width_500 {
+  max-width: 500px !important
+}
+
+.centered_wrapper_min_height_50 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+  min-height: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.background_img {
+  background: url("../images/music.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  height: 100VH;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
+}
+
+.white_text {
+  color: white !important;
+}
+
+.normal_font {
+  font-weight: normal !important;
+}
+
+.amplify_blue {
+  color: rgb(2, 73, 109, 1) !important;
+}
+
+.amplify_color_background {
+  background-color: #FF0F4C !important;
 }
