@@ -21,15 +21,17 @@
           <div class="row">
             <div class="ui form">
               <div class="column max_width_500">
+                <%= form_tag(new_voter_signup_path, { method: :post, class: "ui form" }) do |f| %>
                   <div class="field">
-                    <input type="number" placeholder="Room Code">
+                    <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
                   </div>
                   <div class="field">
-                    <input type="text" placeholder="Nickname">
+                    <%= text_field_tag :nickname, nil, placeholder: "Nickname", reqired: true %>
                   </div>
-                  <div class="field center aligned" style="text-align: center;">
-                    <div class="ui amplify_color_background white_text button" style="width: 100%;">Join Room</div>
+                  <div class="field">
+                    <%= submit_tag "Join Room", class: "ui amplify_color_background white_text button" %>
                   </div>
+                <% end %>
               </div>
             </div>
           </div>

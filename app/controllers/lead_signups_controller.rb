@@ -1,4 +1,4 @@
-class LeadSignupController < ApplicationController
+class LeadSignupsController < ApplicationController
   def new
     @lead = Lead.new
     @lead.referrer = request.referer

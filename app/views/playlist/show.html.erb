@@ -17,17 +17,15 @@
         Song Title
       </div>
     </div>
-    <!--Item will eventually be a song object, can do item.votes, item.artist, etc. -->
     <% @songs.each do |item| %>
       <div class="item">
         <div class="left floated content">
           <i class="triangle up icon"></i>42<i class="triangle down icon"></i>
         </div>
         <div class="content">
-          <div class="header"><%= item %></div>
+          <div class="header"><%= item.title %></div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-

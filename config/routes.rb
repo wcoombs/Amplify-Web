@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  get 'song_list/index'
+  root to: "lead_signups#new"
+  resources :rooms, only: [:create]
 
-  get 'join_room/index'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  root to: "lead_signup#new"
-  resources :lead_signup, only: [:new, :create]
+  resources :lead_signups, only: [:new, :create]
+  resources :voter_signups, only: [:new, :create]
+  resources :playlist, only: [:show] do
+    resources :vote, only: [:update]
+  end
 end
