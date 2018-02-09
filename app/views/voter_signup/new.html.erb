@@ -1,13 +1,48 @@
-<div class="centered_wrapper">
-<%= form_tag(voter_signup_index_path, { method: :post, class: "ui form" }) do |f| %>
-  <div class="field">
-    <%= text_field_tag :room_code, nil, placeholder: "room code!", required: true %>
-  </div>
-  <div class="field">
-    <%= text_field_tag :nickname, nil, placeholder: "your name!", reqired: true %>
-  </div>
-  <div class="field">
-    <%= submit_tag "Sign me up", class: "ui amplify_color_background white_text button" %>
-  </div>
-<% end %>
-</div
+<div class="background_img">
+  <div class="overlay">
+      <div class="ui center aligned stackable grid">
+        <div class="row">
+          <div class="column">
+            <img class="ui large middle aligned image amplify_logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
+          </div>
+        </div>
+        <% if flash[:notice] %>
+          <div class="row">
+            <div class="column">
+              <div class="ui huge normal_font white_text header"><%= flash[:notice] %></div>
+            </div>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="column">
+              <div class="ui massive normal_font white_text header">Join the party!</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui form">
+              <div class="column max_width_500">
+                <%= form_tag(voter_signup_index_path, { method: :post, class: "ui form" }) do |f| %>
+                  <div class="field">
+                    <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
+                  </div>
+                  <div class="field">
+                    <%= text_field_tag :nickname, nil, placeholder: "Nickname", reqired: true %>
+                  </div>
+                  <div class="field">
+                    <%= submit_tag "Join Room", class: "ui amplify_color_background white_text button" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+<script>
+    $('.amplify_logo')
+        .transition('set looping pulse')
+        .transition('pulse', '1500ms')
+    ;
+</script>

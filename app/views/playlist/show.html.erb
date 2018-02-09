@@ -1,16 +1,31 @@
-<% @songs.each do |song| %>
-  <%= song.title %>
-
-  <%= form_tag(playlist_vote_path(song.room, song.id), { method: :put } ) do %>
-    <%= radio_button_tag(:vote, 1) %>
-    <%= label_tag(:vote, "upvote") %>
-
-    <%= radio_button_tag(:vote, 0) %>
-    <%= label_tag(:vote, "novote") %>
-
-    <%= radio_button_tag(:vote, -1) %>
-    <%= label_tag(:vote, "downvote  ") %>
-
-    <%= submit_tag "submit vote" %>
-  <% end %>
-<% end %>
+<div class="ui fixed inverted menu">
+  <div class="ui container">
+    <div class="header item">
+      <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
+      Amplify
+    </div>
+    <div class="header item">Playlist Title</div>
+  </div>
+</div>
+<div class="ui inverted attached segment song_list">
+  <div class="ui inverted relaxed divided list">
+    <div class="item">
+      <div class="left floated content">
+        Votes
+      </div>
+      <div class="content">
+        Song Title
+      </div>
+    </div>
+    <% @songs.each do |item| %>
+      <div class="item">
+        <div class="left floated content">
+          <i class="triangle up icon"></i>42<i class="triangle down icon"></i>
+        </div>
+        <div class="content">
+          <div class="header"><%= item.title %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

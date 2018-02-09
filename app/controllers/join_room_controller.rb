@@ -1,3 +1,0 @@
-class JoinRoomController < ApplicationController
-
-end
