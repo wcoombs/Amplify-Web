@@ -1,4 +1,4 @@
-class VoterSignupController < ApplicationController
+class VoterSignupsController < ApplicationController
   def new
   end
 

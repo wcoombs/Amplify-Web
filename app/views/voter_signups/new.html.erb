@@ -21,7 +21,7 @@
           <div class="row">
             <div class="ui form">
               <div class="column max_width_500">
-                <%= form_tag(voter_signup_index_path, { method: :post, class: "ui form" }) do |f| %>
+                <%= form_tag(new_voter_signup_path, { method: :post, class: "ui form" }) do |f| %>
                   <div class="field">
                     <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
                   </div>

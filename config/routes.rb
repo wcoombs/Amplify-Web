@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  root to: "lead_signup#new"
-  resources :room, only: [:create]
+  root to: "lead_signups#new"
+  resources :rooms, only: [:create]
 
-  resources :lead_signup, only: [:new, :create]
-  resources :voter_signup, only: [:new, :create]
+  resources :lead_signups, only: [:new, :create]
+  resources :voter_signups, only: [:new, :create]
   resources :playlist, only: [:show] do
     resources :vote, only: [:update]
   end

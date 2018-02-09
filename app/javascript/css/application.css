@@ -62,7 +62,7 @@
   background-color: #FF0F4C !important;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   .ui.button {
     font-size: 2rem !important;
   }

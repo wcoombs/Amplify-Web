@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe VoterSignupController, type: :controller do
+RSpec.describe VoterSignupsController, type: :controller do
   let(:room_a) { rooms(:room_a) }
 
   describe "GET#show" do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LeadSignupController, type: :controller do
+RSpec.describe LeadSignupsController, type: :controller do
   describe "GET#new" do
     it "renders the page" do
       process(:new)

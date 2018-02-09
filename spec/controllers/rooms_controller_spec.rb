@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RoomController, type: :controller do
+RSpec.describe RoomsController, type: :controller do
   describe "POST#create" do
     it "responds to a json request" do
       process(:create, format: :json)
