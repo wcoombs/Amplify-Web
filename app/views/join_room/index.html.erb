@@ -1,0 +1,46 @@
+<div class="background_img">
+  <div class="overlay">
+      <div class="ui center aligned stackable grid">
+        <div class="row">
+          <div class="column">
+            <img class="ui large middle aligned image amplify_logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
+          </div>
+        </div>
+        <% if flash[:notice] %>
+          <div class="row">
+            <div class="column">
+              <div class="ui huge normal_font white_text header"><%= flash[:notice] %></div>
+            </div>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="column">
+              <div class="ui massive normal_font white_text header">Join the party!</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="ui form">
+              <div class="column max_width_500">
+                  <div class="field">
+                    <input type="number" placeholder="Room Code">
+                  </div>
+                  <div class="field">
+                    <input type="text" placeholder="Nickname">
+                  </div>
+                  <div class="field center aligned" style="text-align: center;">
+                    <div class="ui amplify_color_background white_text button" style="width: 100%;">Join Room</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+<script>
+    $('.amplify_logo')
+        .transition('set looping pulse')
+        .transition('pulse', '1500ms')
+    ;
+</script>

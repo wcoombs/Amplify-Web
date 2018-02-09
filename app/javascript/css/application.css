@@ -55,9 +55,45 @@
 }
 
 .amplify_blue {
-  color: rgb(2, 73, 109, 1) !important;
+  color: rgb(2, 73, 109) !important;
 }
 
 .amplify_color_background {
   background-color: #FF0F4C !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .ui.button {
+    font-size: 2rem !important;
+  }
+
+  .ui.form {
+    font-size: 2rem !important;
+  }
+
+  .ui.massive.header {
+    font-size: 2rem;
+  }
+
+  .song_table {
+    font-size: 1.2rem !important;
+    margin-left: 3rem !important;
+    margin-right: 3rem !important;
+  }
+}
+
+html {
+  background: #303030 !important;
+}
+
+body {
+  background: #303030 !important;
+}
+
+.ui.inverted {
+  background: #303030 !important;
+}
+
+.song_list {
+  margin-top: 4rem !important;
 }
