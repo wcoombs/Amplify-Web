@@ -6,7 +6,7 @@ class VoterSignupsController < ApplicationController
     room = Room.find_by(room_code: params[:room_code])
     if room.nil?
       flash[:error] = "Ooops wrong code bruh"
-      redirect_to new_voter_signup_path
+      render new_voter_signup_path
     else
       voter = Voter.create(room: room, nickname: params[:nickname])
       session[:voter_id] = voter.id

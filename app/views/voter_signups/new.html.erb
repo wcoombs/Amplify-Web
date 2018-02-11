@@ -11,24 +11,22 @@
               <div class="ui massive normal_font white_text header">Join the party!</div>
             </div>
           </div>
-          <div class="row">
-            <div class="ui form">
-              <div class="column max_width_500">
-                <%= form_tag({ action: :create, class: "ui form" }) do |f| %>
-                  <%= render "layouts/flash_messages" %>
-                  <div class="field">
-                    <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
-                  </div>
-                  <div class="field">
-                    <%= text_field_tag :nickname, nil, placeholder: "Nickname", reqired: true %>
-                  </div>
-                  <div class="field">
-                    <%= submit_tag "Join Room", class: "ui amplify_color_background white_text button" %>
-                  </div>
-                <% end %>
+        <div class="row">
+          <div class="column max_width_500">
+            <%= render "layouts/flash_messages" %>
+            <%= form_tag(voter_signups_path, { method: :post, class: "ui form" }) do |f| %>
+              <div class="field">
+                <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
               </div>
-            </div>
+              <div class="field">
+                <%= text_field_tag :nickname, nil, placeholder: "Nickname", reqired: true %>
+              </div>
+              <div class="field">
+                <%= submit_tag "Join Room", class: "ui amplify_color_background white_text button" %>
+              </div>
+            <% end %>
           </div>
+        </div>
       </div>
     </div>
 </div>
