@@ -6,13 +6,6 @@
             <img class="ui large middle aligned image amplify_logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
           </div>
         </div>
-        <% if flash[:notice] %>
-          <div class="row">
-            <div class="column">
-              <div class="ui huge normal_font white_text header"><%= flash[:notice] %></div>
-            </div>
-          </div>
-        <% else %>
           <div class="row">
             <div class="column">
               <div class="ui massive normal_font white_text header">Join the party!</div>
@@ -21,7 +14,12 @@
           <div class="row">
             <div class="ui form">
               <div class="column max_width_500">
-                <%= form_tag(new_voter_signup_path, { method: :post, class: "ui form" }) do |f| %>
+                <%= form_tag({ action: :create, class: "ui form" }) do |f| %>
+                  <% if flash[:room_notice] %>
+                    <div class="ui pointing below red basic label">
+                      <%= flash[:room_notice] %>
+                    </div>
+                  <% end %>
                   <div class="field">
                     <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
                   </div>
@@ -35,7 +33,6 @@
               </div>
             </div>
           </div>
-        <% end %>
       </div>
     </div>
 </div>
@@ -44,5 +41,16 @@
     $('.amplify_logo')
         .transition('set looping pulse')
         .transition('pulse', '1500ms')
+    ;
+
+    $('.ui.form')
+        .form({
+            fields: {
+                nickname     : 'empty',
+                room_code    : 'empty',
+            },
+            inline : true,
+            on     : 'blur'
+        })
     ;
 </script>
