@@ -17,13 +17,13 @@
         Song Title
       </div>
     </div>
-    <% @songs.each do |item| %>
+    <% @songs.each do |song| %>
       <div class="item">
         <div class="left floated content">
           <i class="triangle up icon"></i>42<i class="triangle down icon"></i>
         </div>
         <div class="content">
-          <div class="header"><%= item.title %></div>
+          <div class="header"><%= song.title  %></div>
         </div>
       </div>
     <% end %>
