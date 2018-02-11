@@ -15,11 +15,7 @@
             <div class="ui form">
               <div class="column max_width_500">
                 <%= form_tag({ action: :create, class: "ui form" }) do |f| %>
-                  <% if flash[:room_notice] %>
-                    <div class="ui pointing below red basic label">
-                      <%= flash[:room_notice] %>
-                    </div>
-                  <% end %>
+                  <%= render "layouts/flash_messages" %>
                   <div class="field">
                     <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
                   </div>
