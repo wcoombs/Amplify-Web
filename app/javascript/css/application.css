@@ -41,7 +41,6 @@
 
 .overlay {
     background: rgba(0, 0, 0, 0.45);
-    /*overflow: hidden;*/
     height: 100%;
     z-index: 2;
 }
@@ -60,26 +59,6 @@
 
 .amplify_color_background {
   background-color: #FF0F4C !important;
-}
-
-@media only screen and (min-width: 768px) {
-  .ui.button {
-    font-size: 2rem !important;
-  }
-
-  .ui.form {
-    font-size: 2rem !important;
-  }
-
-  .ui.massive.header {
-    font-size: 2rem;
-  }
-
-  .song_table {
-    font-size: 1.2rem !important;
-    margin-left: 3rem !important;
-    margin-right: 3rem !important;
-  }
 }
 
 html {
