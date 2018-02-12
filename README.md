@@ -2,6 +2,20 @@
 
 [![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=shield&circle-token=030f03a14524c5530c203dc2c5f8b0d733389c2f)](https://circleci.com/gh/wcoombs/Amplify-Web)
 
+# How to Demo the App Locally
+## For ease of use, use your Mac! 
+1. Create a room
+* Follow mobile repo README to set up local server and build project (must be on a Mac)
+* Start the mobile simulator (click the run icon)
+* Go into the Amplify-Web repository and run "rails s" to start the server
+* Hit "Create Room" button to be given a room code (remember this!)
+
+2. Join a room
+* Go to localhost:3000 to access the web app
+* Enter the aforementioned room code and a nickname to enter the room (case sensitive)
+* View the songs and vote accordingly (you get one vote per song; vote can be changed)
+
+
 ### API Endpoint Reference
 
 ##### Registration
