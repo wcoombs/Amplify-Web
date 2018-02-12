@@ -20,7 +20,7 @@
     <% @songs.each do |song| %>
       <div class="item">
         <div class="left floated content">
-          <i class="triangle up icon up_vote" data-song-id=<%= song.id %> data-vote-score=1></i><%= song.votes.sum(:score) %><i class="triangle down icon down_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
+          <i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i><%= song.votes.sum(:score) %><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
         </div>
         <div class="content">
           <div class="header"><%= song.title %></div>
@@ -31,26 +31,15 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        var up_songs = document.getElementsByClassName("up_vote");
-        for (var i = 0; i < up_songs.length; i++) {
-            up_songs[i].addEventListener("mouseup", function() { vote_listener(event) }, false);
-        }
-        var down_songs = document.getElementsByClassName("down_vote");
-        for (var i=0; i < down_songs.length; i++) {
-            down_songs[i].addEventListener("mouseup", function() { vote_listener(event) }, false);
-        }
+  $('.submit_vote').click(function( event ){
+    var score = event.target.getAttribute("data-vote-score");
+    var song_id = event.target.getAttribute("data-song-id");
+    Rails.ajax({
+      type: "PUT",
+      url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
+      success: function() {
+        location.reload();
+      }
     });
-
-    function vote_listener(event) {
-        var score = event.target.getAttribute("data-vote-score");
-        var song_id = event.target.getAttribute("data-song-id");
-        Rails.ajax({
-            type: "PUT",
-            url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
-            success: function() {
-                location.reload();
-            }
-        });
-    }
+  });
 </script>
