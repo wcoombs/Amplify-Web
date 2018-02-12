@@ -25,3 +25,4 @@ config/secrets.yml
 
 # Ignore specific to MacOS
 .DS_Store
+.idea/
