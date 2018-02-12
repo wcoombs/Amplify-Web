@@ -101,3 +101,7 @@ i.icon {
   margin: 0.25rem 0.25rem 0rem 0.25rem !important;
   font-size: 2rem !important;
 }
+
+.vote_selected {
+  color: #FF0F4C;
+}
