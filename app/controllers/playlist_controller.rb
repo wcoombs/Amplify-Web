@@ -5,8 +5,4 @@ class PlaylistController < ApplicationController
     @songs = room.songs
     @room_id = room.id
   end
-
-  def vote
-
-  end
 end
