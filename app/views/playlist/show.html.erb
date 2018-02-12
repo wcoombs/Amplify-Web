@@ -47,11 +47,10 @@
         var song_id = event.target.getAttribute("data-song-id");
         Rails.ajax({
             type: "PUT",
-            url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score
+            url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
+            success: function() {
+                location.reload();
+            }
         });
-        setTimeout(function() {
-            window.location.reload();
-        }, 1000);
-
     }
 </script>
