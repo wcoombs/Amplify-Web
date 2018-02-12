@@ -1,5 +1,4 @@
 class PlaylistController < ApplicationController
-  helper_method :up_vote, :down_vote
 
   def show
     room = Room.find(params[:id])
