@@ -6,7 +6,6 @@ RSpec.describe RoomsController, type: :controller do
       process(:create, format: :json)
 
       json = JSON.parse(response.body)
-      expect(json["room_code"]).to eq("ola")
       expect(response).to have_http_status(:ok)
     end
   end
