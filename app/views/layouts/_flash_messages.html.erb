@@ -1,0 +1,6 @@
+<% flash.each do |name, msg| %>
+<% message_class = ['success', 'notice'].include?(name) ? 'success' : 'error' %>
+<div class="ui <%= message_class %> message">
+    <p><%= msg.html_safe %></p>
+</div>
+<% end %>
