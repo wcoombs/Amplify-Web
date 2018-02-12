@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "lead_signups#new"
+  root to: "voter_signups#new"
   resources :rooms, only: [:create]
 
   resources :lead_signups, only: [:new, :create]
