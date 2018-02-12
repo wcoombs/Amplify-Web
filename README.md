@@ -2,24 +2,55 @@
 
 [![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=shield&circle-token=030f03a14524c5530c203dc2c5f8b0d733389c2f)](https://circleci.com/gh/wcoombs/Amplify-Web)
 
+## How to Demo the App Locally
+* For ease of use, use your Mac!
+
+1. Create a room
+* Follow mobile repo README to set up local server and build project (must be on a Mac)
+* Start the mobile simulator (click the run icon)
+* Go into the Amplify-Web repository and run "rails s" to start the server
+* Hit "Create Room" button to be given a room code (remember this!)
+
+2. Join a room
+* Go to localhost:3000 to access the web app
+* Enter the aforementioned room code and a nickname to enter the room (case sensitive)
+* View the songs and vote accordingly (you get one vote per song; vote can be changed)
+
+## How to Demo the App on Production
+1. Follow the steps under the Mobile repository
+2. The link to the production web site is ```https://amplifyapp.ca```
+
+## How to Run the Tests Locally
+1. Navigate to the root directory for the repository
+2. Run the command ```rspec```
+  * If this fails for whatever reason, explicitly state what you want to do (```bundle exec rspec spec```)
+3. ...
+4. Profit
+
+## Display the Endpoints
+1. Navigate to the root directory for the repository
+2. Run the command ```rails routes```
+3. ...
+4. Profit
+
 ### API Endpoint Reference
 
 ##### Registration
-|  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
-| -------- | ---------- | ------- | ------------ |  -------- |
-| POST | /api/register/`room_id` | Join a room | Anybody | - |
+|  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
+|:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
+|     ✓     |  POST | /api/register/`room_id` | Join a room | Anybody | - |
 
 ##### Rooms
-|  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
-| -------- | ---------- | ------- | ------------ |  -------- |
-| POST | /api/rooms/ | Create a room | Anybody | - |
-| DELETE | /api/rooms/`room_id` | Destroy a room | Anybody | - |
+|  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
+|:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
+|     ✓     | POST | /api/rooms/ | Create a room | Anybody | - |
+|     x     | DELETE | /api/rooms/`room_id` | Destroy a room | Anybody | - |
 
 ##### Playlists
-|  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
-| -------- | ---------- | ------- | ------------ |  -------- |
-| GET | /api/playlist/`room_id` | View playlist | Authenticated | Songs |
-| PUT | /api/playlist/`room_id`/`song_id` | Vote on a song | Authenticated | Song |
+|  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
+|:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
+|     ✓     | GET | /api/playlist/`room_id` | View playlist | Authenticated | Songs |
+|     ✓     | PUT | /api/playlist/`room_id`/`song_id` | Vote on a song | Authenticated | Song |
 
 
 # How to setup a production environment
