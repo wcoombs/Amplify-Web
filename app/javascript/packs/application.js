@@ -8,10 +8,13 @@
 // layout file, like app/views/layouts/application.html.erb
 import $ from 'jquery';
 import "application.css";
+import Rails from 'rails-ujs'
 import "inverted-logo.svg";
 
 window.$ = $;
 window.jQuery = $;
+window.Rails = Rails;
 
+Rails.start();
 require('semantic-ui-css/semantic.js');
 require('semantic-ui-css/semantic.css');

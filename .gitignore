@@ -23,4 +23,8 @@ config/secrets.yml
 /public/packs-test
 /node_modules
 
+# Ignore specific to MacOS
+.DS_Store
+
+# Ignore local environment setup
 /config/local_env.yml
