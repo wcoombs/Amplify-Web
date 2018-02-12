@@ -1,7 +1,7 @@
 module Data_Generator
   extend ActiveSupport::Concern
 
-  @@song_list = [
+  SONG_LIST = [
       "Toxic",
       "Bad Blood",
       "Never Gonna Give You Up",
@@ -30,8 +30,8 @@ module Data_Generator
 
   def add_songs(room_id)
     for i in 0..4
-      song_num = rand(@@song_list.length)
-      Song.create(title: @@song_list[song_num], room_id:room_id)
+      song_num = rand(SONG_LIST.length)
+      Song.create(title: SONG_LIST[song_num], room_id:room_id)
     end
   end
 end
