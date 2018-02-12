@@ -20,7 +20,7 @@
     <% @songs.each do |song| %>
       <div class="item">
         <div class="left floated content">
-          <i class="triangle up icon" onclick="upvote()"></i><%= song.vote_count %><i class="triangle down icon"></i>
+          <i class="triangle up icon"></i><%= link_to "UpVote", playlist_vote_path(@room_id, song.id), :method => :put %><%= song.vote_count %><i class="triangle down icon"></i>
         </div>
         <div class="content">
           <div class="header"><%= song.title  %></div>
@@ -30,9 +30,3 @@
   </div>
 </div>
 
-<script>
-  function upvote() {
-      <% up_vote -%>
-      location.reload();
-  }
-</script>
