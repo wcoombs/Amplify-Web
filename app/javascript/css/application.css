@@ -41,7 +41,7 @@
 
 .overlay {
     background: rgba(0, 0, 0, 0.45);
-    overflow: hidden;
+    /*overflow: hidden;*/
     height: 100%;
     z-index: 2;
 }

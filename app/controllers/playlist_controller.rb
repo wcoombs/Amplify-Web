@@ -3,4 +3,5 @@ class PlaylistController < ApplicationController
     room = Room.find(params[:id])
     @songs = room.songs
   end
+
 end
