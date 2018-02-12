@@ -37,18 +37,18 @@
 
 ##### Registration
 |  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
-| ----------- | -------- | ---------- | ------- | ------------ |  -------- |
+|:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
 |     ✓     |  POST | /api/register/`room_id` | Join a room | Anybody | - |
 
 ##### Rooms
 |  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
-| ----------- | -------- | ---------- | ------- | ------------ |  -------- |
+|:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
 |     ✓     | POST | /api/rooms/ | Create a room | Anybody | - |
 |     x     | DELETE | /api/rooms/`room_id` | Destroy a room | Anybody | - |
 
 ##### Playlists
 |  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
-| ----------- | -------- | ---------- | ------- | ------------ |  -------- |
+|:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
 |     ✓     | GET | /api/playlist/`room_id` | View playlist | Authenticated | Songs |
 |     ✓     | PUT | /api/playlist/`room_id`/`song_id` | Vote on a song | Authenticated | Song |
 
