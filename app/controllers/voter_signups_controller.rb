@@ -3,7 +3,7 @@ class VoterSignupsController < ApplicationController
   end
 
   def create
-    room = Room.find_by(room_code: params[:room_code])
+    room = Room.find_by(room_code: params[:room_code].upcase)
     if room.nil?
       flash[:error] = "Ooops wrong code bruh"
       render new_voter_signup_path
