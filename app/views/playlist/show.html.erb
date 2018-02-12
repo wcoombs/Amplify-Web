@@ -7,28 +7,40 @@
     <div class="header item">Playlist Title</div>
   </div>
 </div>
-<div class="ui inverted attached segment song_list">
-  <div class="ui inverted relaxed divided list">
-    <div class="item">
-      <div class="left floated content">
-        Votes
-      </div>
-      <div class="content">
-        Song Title
-      </div>
-    </div>
-    <% @songs.each do |song| %>
-      <div class="item">
-        <div class="left floated content">
-          <i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i><%= song.votes.sum(:score) %><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
+
+<table class="song_list white_text">
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <thead>
+  <tr>
+    <th class="vote_count">Votes</th>
+    <th style="text-align: left;">Song</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @songs.each do |song| %>
+    <tr>
+      <td class="vote_count">
+        <div>
+          <i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i>
         </div>
-        <div class="content">
-          <div class="header"><%= song.title %></div>
+        <div class="sum">
+          <%= song.votes.sum(:score) %>
         </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+        <div>
+          <i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
+        </div>
+      </td>
+      <td>
+        <div class="song_title"><%= song.title %></div>
+        <div class="artist">Artist Name</div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <script type="text/javascript">
   $('.submit_vote').click(function( event ){

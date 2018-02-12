@@ -67,6 +67,7 @@ html {
 
 body {
   background: #303030 !important;
+  font-size: 1.2rem !important;
 }
 
 .ui.inverted {
@@ -75,4 +76,28 @@ body {
 
 .song_list {
   margin-top: 4rem !important;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.song_list > tbody > tr {
+  border: 1px solid darkgrey;
+}
+
+.artist {
+  color: darkgrey !important;
+  font-style: italic;
+}
+
+.vote_count {
+  text-align: center !important;
+}
+
+.vote_count.sum{
+  font-size: 1.5rem !important;
+}
+
+i.icon {
+  margin: 0.25rem 0.25rem 0rem 0.25rem !important;
+  font-size: 2rem !important;
 }
