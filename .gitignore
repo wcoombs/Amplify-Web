@@ -22,3 +22,6 @@ config/secrets.yml
 /public/packs
 /public/packs-test
 /node_modules
+
+# Ignore specific to MacOS
+.DS_Store
