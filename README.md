@@ -43,8 +43,8 @@
 ##### Rooms
 |  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
 |:-----------:|:--------:|:----------:|:-------:|:------------:|:---------:|
-|     ✓     | POST | /api/rooms/ | Create a room | Anybody | - |
-|     x     | DELETE | /api/rooms/`room_id` | Destroy a room | Anybody | - |
+|     ✓     | POST | /rooms/ | Create a room | Anybody | - |
+|     ✓     | DELETE | /rooms/`room_id` | Destroy a room | Anybody | - |
 
 ##### Playlists
 |  Completed  |  Method  |  Endpoint  |  Usage  |  Permission  |  Returns  |
