@@ -6,6 +6,7 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
 
 <table class="song_list white_text">
   <colgroup>
@@ -23,13 +24,13 @@
     <tr>
       <td class="vote_count">
         <div>
-          <i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i>
-        </div>
-        <div class="sum">
-          <%= song.votes.sum(:score) %>
-        </div>
-        <div>
-          <i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
+          <i class="<%= has_voted(song.id) == 1 ? 'triangle up icon submit_vote vote_selected' : 'triangle up icon submit_vote'%>" data-song-id=<%= song.id %> data-vote-score=1></i>
+	</div>
+	<div class="sum">
+	<%= song.votes.sum(:score) %>
+	</div>
+	<div>
+	<i class="<%= has_voted(song.id) == -1 ? 'triangle down icon submit_vote vote_selected' : 'triangle down icon submit_vote'%>" data-song-id=<%= song.id %> data-vote-score=-1></i>
         </div>
       </td>
       <td>
