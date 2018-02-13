@@ -21,6 +21,7 @@ RSpec.describe RoomsController, type: :controller do
       end.to change { Room.count }.by(-1)
       .and change { Song.count }.by(-1)
       .and change { Voter.count }.by(-1)
+      .and change { Vote.count }.by(-1)
 
       expect(response).to have_http_status(:ok)
     end
