@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe PlaylistController, type: :controller do
   let(:room_a) { rooms(:room_a) }
   let(:voter_a) { voters(:voter_a) }
+
   describe "GET#show" do
     it "renders the page" do
       process(:show, params: { id: room_a.id }, session: { voter_id: voter_a.id })
