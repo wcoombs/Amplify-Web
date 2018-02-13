@@ -20,7 +20,7 @@
     <% @songs.each do |song| %>
       <div class="item">
         <div class="left floated content">
-          <i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i><%= song.votes.sum(:score) %><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
+          <i class="<%= has_voted(song.id) == 1 ? 'triangle up icon submit_vote vote_selected' : 'triangle up icon submit_vote'%>" data-song-id=<%= song.id %> data-vote-score=1></i><%= song.votes.sum(:score) %><i class="<%= has_voted(song.id) == -1 ? 'triangle down icon submit_vote vote_selected' : 'triangle down icon submit_vote'%>" data-song-id=<%= song.id %> data-vote-score=-1></i>
         </div>
         <div class="content">
           <div class="header"><%= song.title %></div>
@@ -34,22 +34,11 @@
   $('.submit_vote').click(function( event ){
     var score = event.target.getAttribute("data-vote-score");
     var song_id = event.target.getAttribute("data-song-id");
-    if (score === "1") {
-        console.log("upvote");
-    } else {
-        console.log("uh oh");
-    }
     Rails.ajax({
       type: "PUT",
       url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
       success: function() {
         location.reload();
-        if (score === "1") {
-            event.target.className += " vote_selected";
-        } else if (score === "-1") {
-            event.target.className += " vote_selected";
-        }
-
       }
     });
   });
