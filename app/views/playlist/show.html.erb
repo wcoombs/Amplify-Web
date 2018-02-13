@@ -4,53 +4,47 @@
       <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
       Amplify
     </div>
-    <div class="header item">Playlist Title</div>
   </div>
 </div>
-<div class="ui inverted attached segment song_list">
-  <div class="ui inverted relaxed divided list">
-    <div class="item">
-      <div class="left floated content">
-        Votes
-      </div>
-      <div class="content">
-        Song Title
-      </div>
-    </div>
-    <% @songs.each do |song| %>
-      <div class="item">
-        <div class="left floated content">
-          <i class="triangle up icon up_vote" data-song-id=<%= song.id %> data-vote-score=1></i><%= song.votes.sum(:score) %><i class="triangle down icon down_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
-        </div>
-        <div class="content">
-          <div class="header"><%= song.title %></div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+
+<table class="ui inverted table unstackable song_list">
+  <colgroup>
+    <col class="width-20">
+    <col class="width-80">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="vote_count">Votes</th>
+      <th>Song</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @songs.each do |song| %>
+    <tr>
+      <td class="vote_count">
+        <div><i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i></div>
+        <div><%= song.votes.sum(:score) %></div>
+        <div><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i></div>
+      </td>
+      <td>
+        <div><%= song.title %></div>
+        <div class="artist"><%= song.artist %></div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        var up_songs = document.getElementsByClassName("up_vote");
-        for (var i = 0; i < up_songs.length; i++) {
-            up_songs[i].addEventListener("mouseup", function() { vote_listener(event) }, false);
-        }
-        var down_songs = document.getElementsByClassName("down_vote");
-        for (var i=0; i < down_songs.length; i++) {
-            down_songs[i].addEventListener("mouseup", function() { vote_listener(event) }, false);
-        }
+  $('.submit_vote').click(function( event ){
+    var score = event.target.getAttribute("data-vote-score");
+    var song_id = event.target.getAttribute("data-song-id");
+    Rails.ajax({
+      type: "PUT",
+      url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
+      success: function() {
+        location.reload();
+      }
     });
-
-    function vote_listener(event) {
-        var score = event.target.getAttribute("data-vote-score");
-        var song_id = event.target.getAttribute("data-song-id");
-        Rails.ajax({
-            type: "PUT",
-            url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
-            success: function() {
-                location.reload();
-            }
-        });
-    }
+  });
 </script>
