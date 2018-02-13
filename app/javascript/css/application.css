@@ -70,6 +70,10 @@ body {
   font-size: 1.2rem !important;
 }
 
+.ui.menu > .container > .header.item {
+  font-size: 1.2rem !important;
+}
+
 .ui.inverted {
   background: #303030 !important;
 }
@@ -100,4 +104,20 @@ body {
 i.icon {
   margin: 0.25rem 0.25rem 0rem 0.25rem !important;
   font-size: 2rem !important;
+}
+
+.width-20 {
+  width: 20%;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+.ui.table td {
+  padding: 0 !important;
+}
+.ui.table th {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
