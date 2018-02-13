@@ -13,7 +13,7 @@
 
 2. Join a room
 * Go to localhost:3000 to access the web app
-* Enter the aforementioned room code and a nickname to enter the room (case sensitive)
+* Enter the aforementioned room code and a nickname to enter the room (case insensitive)
 * View the songs and vote accordingly (you get one vote per song; vote can be changed)
 
 ## How to Demo the App on Production
