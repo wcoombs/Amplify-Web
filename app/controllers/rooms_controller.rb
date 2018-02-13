@@ -8,8 +8,18 @@ class RoomsController < ApplicationController
     add_songs(new_room.id)
 
     respond_to do |format|
-      format.json { render json: { room_code: new_room.room_code }, status: :ok }
+      format.json { render json: { id: new_room.id, room_code: new_room.room_code }, status: :ok }
       format.html { head :forbidden }
     end
   end
+
+  def destroy
+    Room.find(params[:id]).destroy
+
+    respond_to do |format|
+      format.json { render json: { }, status: :ok }
+      format.html { head :forbidden }
+    end
+  end
+
 end
