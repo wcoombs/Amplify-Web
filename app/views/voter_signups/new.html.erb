@@ -16,10 +16,10 @@
             <%= render "layouts/flash_messages" %>
             <%= form_tag(voter_signups_path, { method: :post, class: "ui form" }) do |f| %>
               <div class="field">
-                <%= text_field_tag :room_code, nil, placeholder: "Room Code", required: true %>
+                <%= telephone_field_tag :room_code, nil, placeholder: "Room Code" %>
               </div>
               <div class="field">
-                <%= text_field_tag :nickname, nil, placeholder: "Nickname", required: true %>
+                <%= text_field_tag :nickname, nil, placeholder: "Nickname" %>
               </div>
               <div class="field">
                 <%= submit_tag "Join Room", class: "ui amplify_color_background white_text button" %>
@@ -32,19 +32,18 @@
 </div>
 
 <script>
-    $('.amplify_logo')
-        .transition('set looping pulse')
-        .transition('pulse', '1500ms')
-    ;
+  $('.amplify_logo')
+    .transition('set looping pulse')
+    .transition('pulse', '1500ms')
+  ;
 
-    $('.ui.form')
-        .form({
-            fields: {
-                nickname     : 'empty',
-                room_code    : 'empty',
-            },
-            inline : true,
-            on     : 'blur'
-        })
-    ;
+  $('.ui.form')
+    .form({
+      fields: {
+        room_code    : 'empty',
+        nickname     : 'empty'
+      },
+      inline : true,
+    })
+  ;
 </script>
