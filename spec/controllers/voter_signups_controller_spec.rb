@@ -14,7 +14,7 @@ RSpec.describe VoterSignupsController, type: :controller do
     it "allows a voter to signup for a room" do
       expect do
         expect do
-          process(:create, params: { nickname: "sean", room_code: "cool123" })
+          process(:create, params: { nickname: "sean", room_code: "1141" })
         end.to change { Voter.count }.by(1)
       end.to change { room_a.voters.count }.by(1)
 
@@ -24,7 +24,15 @@ RSpec.describe VoterSignupsController, type: :controller do
     it "doesn't allow a voter to signup for a room that doesn't exist" do
       expect do
         expect do
-          process(:create, params: { nickname: "rob", room_code: "lame123" })
+          process(:create, params: { nickname: "rob", room_code: "4411" })
+        end.to_not change { Voter.count }
+      end.to_not change { room_a.voters.count }
+    end
+
+    it "doesn't allow a voter to signup for a room without entering a nickname" do
+      expect do
+        expect do
+          process(:create, params: { room_code: "4411" })
         end.to_not change { Voter.count }
       end.to_not change { room_a.voters.count }
     end

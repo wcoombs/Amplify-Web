@@ -1,2 +1,5 @@
 room_a:
-  room_code: COOL123
+  room_code: 1141
+
+room_b:
+  room_code: 3141
