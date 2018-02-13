@@ -1,40 +1,34 @@
 <div class="ui fixed inverted menu">
   <div class="ui container">
-    <div class="header item" style="font-size: 1.2rem;">
+    <div class="header item">
       <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
       Amplify
     </div>
   </div>
 </div>
 
-<table class="song_list white_text">
+<table class="ui inverted table unstackable song_list">
   <colgroup>
-    <col style="width: 20%;">
-    <col style="width: 80%;">
+    <col class="width-20">
+    <col class="width-80">
   </colgroup>
   <thead>
-  <tr>
-    <th class="vote_count">Votes</th>
-    <th style="text-align: left;">Song</th>
-  </tr>
+    <tr>
+      <th class="vote_count">Votes</th>
+      <th>Song</th>
+    </tr>
   </thead>
   <tbody>
   <% @room.songs.each do |song| %>
     <tr>
       <td class="vote_count">
-        <div>
-          <i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i>
-        </div>
-        <div class="sum">
-          <%= song.votes.sum(:score) %>
-        </div>
-        <div>
-          <i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i>
-        </div>
+        <div><i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i></div>
+        <div><%= song.votes.sum(:score) %></div>
+        <div><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i></div>
       </td>
       <td>
-        <div class="song_title"><%= song.title %></div>
-        <div class="artist">Artist</div>
+        <div><%= song.title %></div>
+        <div class="artist"><%= song.artist %></div>
       </td>
     </tr>
   <% end %>
