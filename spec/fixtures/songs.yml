@@ -1,3 +1,7 @@
 song_a:
   room: room_a
   title: toxic
+
+song_b:
+  room: room_b
+  title: off the ground

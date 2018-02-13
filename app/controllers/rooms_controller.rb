@@ -4,7 +4,10 @@ class RoomsController < ApplicationController
 
 
   def create
-    new_room = Room.create(room_code: SecureRandom.hex(2).upcase)
+    new_room = Room.new(room_code: SecureRandom.random_number(8999) + 1000)
+    while !new_room.save
+      new_room.room_code = SecureRandom.random_number(8999) + 1000
+    end
     add_songs(new_room.id)
 
     respond_to do |format|
