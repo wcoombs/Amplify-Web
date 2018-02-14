@@ -22,9 +22,9 @@
   <% @room.songs.each do |song| %>
     <tr>
       <td class="vote_count">
-        <div><i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i></div>
+        <div><i data-song-id=<%= song.id %> data-vote-score=1 class="<%= has_voted(song.id) === 1 ? 'triangle up icon submit_vote amplify_color' : 'triangle up icon submit_vote'%>"></i></div>
         <div><%= song.votes.sum(:score) %></div>
-        <div><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i></div>
+        <div><i data-song-id=<%= song.id %> data-vote-score=-1 class="<%= has_voted(song.id) === -1 ? 'triangle down icon submit_vote amplify_color' : 'triangle down icon submit_vote'%>"></i></div>
       </td>
       <td>
         <div><%= song.title %></div>
