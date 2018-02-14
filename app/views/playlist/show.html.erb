@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-  <% @songs.each do |song| %>
+  <% @room.songs.each do |song| %>
     <tr>
       <td class="vote_count">
         <div><i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i></div>
@@ -28,7 +28,7 @@
       </td>
       <td>
         <div><%= song.title %></div>
-        <div class="artist">Artist</div>
+        <div class="artist"><%= song.artist %></div>
       </td>
     </tr>
   <% end %>
@@ -41,7 +41,7 @@
     var song_id = event.target.getAttribute("data-song-id");
     Rails.ajax({
       type: "PUT",
-      url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
+      url: '/playlist/' + '<%= @room.id %>' + '/vote/' + song_id + '?vote=' + score,
       success: function() {
         location.reload();
       }
