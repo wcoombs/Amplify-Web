@@ -36,6 +36,7 @@
         <div class="song_title"><%= song.title %></div>
         <div class="artist">Artist</div>
         <div>Vote: <%= has_voted(song.id) %></div>
+        <div>VoterID: <%= session[:voter_id] %></div>
       </td>
     </tr>
   <% end %>
@@ -46,6 +47,8 @@
   $('.submit_vote').click(function( event ){
     var score = event.target.getAttribute("data-vote-score");
     var song_id = event.target.getAttribute("data-song-id");
+    console.log(score);
+    console.log(song_id);
     Rails.ajax({
       type: "PUT",
       url: '/playlist/' + '<%= @room_id %>' + '/vote/' + song_id + '?vote=' + score,
