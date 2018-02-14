@@ -23,18 +23,19 @@
     <tr>
       <td class="vote_count">
         <div>
-          <i class="<%= has_voted(song.id) == 1 ? 'triangle up icon submit_vote vote_selected' : 'triangle up icon submit_vote'%>" data-song-id=<%= song.id %> data-vote-score=1></i>
-	</div>
-	<div class="sum">
-	<%= song.votes.sum(:score) %>
-	</div>
-	<div>
-	<i class="<%= has_voted(song.id) == -1 ? 'triangle down icon submit_vote vote_selected' : 'triangle down icon submit_vote'%>" data-song-id=<%= song.id %> data-vote-score=-1></i>
+          <i  data-song-id=<%= song.id %> data-vote-score=1 class="<%= has_voted(song.id) === 1 ? 'triangle up icon submit_vote vote_selected' : 'triangle up icon submit_vote'%>"></i>
+        </div>
+        <div class="sum">
+          <%= song.votes.sum(:score) %>
+        </div>
+        <div>
+          <i data-song-id=<%= song.id %> data-vote-score=-1 class="<%= has_voted(song.id) === -1 ? 'triangle down icon submit_vote vote_selected' : 'triangle down icon submit_vote'%>"></i>
         </div>
       </td>
       <td>
         <div class="song_title"><%= song.title %></div>
         <div class="artist">Artist</div>
+        <div>Vote: <%= has_voted(song.id) %></div>
       </td>
     </tr>
   <% end %>
