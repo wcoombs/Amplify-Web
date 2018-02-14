@@ -19,7 +19,7 @@ RSpec.describe RoomsController, type: :controller do
       expect do
         process(:destroy, format: :json, params: { id: room_a.id })
       end.to change { Room.count }.by(-1)
-      .and change { Song.count }.by(-1)
+      .and change { Song.count }.by(-2)
       .and change { Voter.count }.by(-1)
       .and change { Vote.count }.by(-1)
 
