@@ -24,5 +24,4 @@ class RoomsController < ApplicationController
       format.html { head :forbidden }
     end
   end
-
 end

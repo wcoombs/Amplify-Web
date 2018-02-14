@@ -1,0 +1,1 @@
+Secrets = Rails.application.secrets
