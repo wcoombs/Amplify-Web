@@ -13,7 +13,7 @@ class PlaylistController < ApplicationController
       flash[:error] = "You must create a user to join this room."
       return redirect_to root_path
     end
-    @playlist_data = playlist_data(@room.songs, voter)
+    @playlist_data = playlist_data(@room.songs, voter).sort_by{|s| -s[:vote_sum]}
   end
 
   private
