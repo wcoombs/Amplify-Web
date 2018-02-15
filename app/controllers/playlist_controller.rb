@@ -29,11 +29,4 @@ class PlaylistController < ApplicationController
       }
     end
   end
-
-
-  def has_voted(song_id)
-    @vote = Vote.where("song_id = ? AND voter_id = ?", song_id, session[:voter_id]).limit(1).pluck(:score)[0]
-  end
-
-
 end
