@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :playlist, only: [:show] do
     resources :vote, only: [:update]
   end
+
+  get '/spotify_callback', to: 'callback#spotify_callback', as: :spotify_callback
 end
