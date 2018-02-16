@@ -4,9 +4,9 @@ module Api
       include Data_Generator
 
       def create
-        return render json: { error: "you can only have one room" }, status: :bad_request if @host.room.present?
+        return render json: { error: "Room limit reached!" }, status: :bad_request if @host.room.present?
 
-        new_room = Room.new(room_code: SecureRandom.random_number(8999) + 1000)
+        new_room = Room.new(room_code: SecureRandom.random_number(8999) + 1000, host: @host)
         while !new_room.save
           new_room.room_code = SecureRandom.random_number(8999) + 1000
         end
