@@ -1,0 +1,5 @@
+spotify_account_a:
+  host: host_a
+  access_token: junk
+  refresh_token: refreshingjunk
+  expires_at: 2018-02-18 06:00:00

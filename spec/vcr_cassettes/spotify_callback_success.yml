@@ -1,0 +1,144 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token?code=fakeauthcode&grant_type=authorization_code&redirect_uri=https://amplifyapp.ca/spotify_callback
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Authorization:
+      - Basic junkjunkjunk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 17 Feb 2018 23:34:40 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '411'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=600
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      X-Ua-Compatible:
+      - IE=edge
+      X-Frame-Options:
+      - deny
+      Content-Security-Policy:
+      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://www.google-analytics.com https://www.google.com https://www.gstatic.com;
+        img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://i.imgur.com
+        https://d2mv8tnci56s9d.cloudfront.net https://profile-images.scdn.co https://aci.scdn.co
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net
+        https://fonts.gstatic.com; style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
+        frame-src ''self'' https://www.spotify.com https://www.google.com https://app.adjust.com
+        https://itunes.apple.com itms-apps:;'
+      X-Content-Security-Policy:
+      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://www.google-analytics.com https://www.google.com https://www.gstatic.com;
+        img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://i.imgur.com
+        https://d2mv8tnci56s9d.cloudfront.net https://profile-images.scdn.co https://aci.scdn.co
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net
+        https://fonts.gstatic.com; style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
+        frame-src ''self'' https://www.spotify.com https://www.google.com https://app.adjust.com
+        https://itunes.apple.com itms-apps:;'
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"reallybadaccesstoken","token_type":"Bearer","expires_in":3600,"refresh_token":"totallyrefreshingtoken","scope":"user-read-email
+        user-read-private"}'
+    http_version:
+  recorded_at: Sat, 17 Feb 2018 23:34:40 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer junkjunkjunk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 17 Feb 2018 23:34:40 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '400'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=600
+      Vary:
+      - Accept-Encoding
+      - Authorization
+      Cache-Control:
+      - private, max-age=0
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Origin, Content-Type, Retry-After
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "country" : "CA",
+          "display_name" : null,
+          "email" : "robert.laurin89@gmail.com",
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/user/robpl89"
+          },
+          "followers" : {
+            "href" : null,
+            "total" : 0
+          },
+          "href" : "https://api.spotify.com/v1/users/robpl89",
+          "id" : "robpl89",
+          "images" : [ ],
+          "product" : "premium",
+          "type" : "user",
+          "uri" : "spotify:user:robpl89"
+        }
+    http_version:
+  recorded_at: Sat, 17 Feb 2018 23:34:40 GMT
+recorded_with: VCR 4.0.0

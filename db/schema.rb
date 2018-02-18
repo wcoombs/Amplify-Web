@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213011829) do
+ActiveRecord::Schema.define(version: 20180216025407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hosts", force: :cascade do |t|
+    t.string "email"
+    t.string "api_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "leads", force: :cascade do |t|
     t.string "email"
@@ -26,6 +33,8 @@ ActiveRecord::Schema.define(version: 20180213011829) do
     t.string "room_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "host_id"
+    t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -35,6 +44,16 @@ ActiveRecord::Schema.define(version: 20180213011829) do
     t.datetime "updated_at", null: false
     t.string "artist"
     t.index ["room_id"], name: "index_songs_on_room_id"
+  end
+
+  create_table "spotify_accounts", force: :cascade do |t|
+    t.bigint "host_id"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_spotify_accounts_on_host_id"
   end
 
   create_table "voters", force: :cascade do |t|
