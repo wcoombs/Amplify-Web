@@ -1,11 +1,11 @@
 class CallbackController < ActionController::Base
   def spotify_callback
     if params[:error].present?
-      render json: { error: params[:error] }, status: :bad_request
+      return render json: { error: params[:error] }, status: :bad_request
     end
 
     unless params[:code].present?
-      render json: { error: "Auth token required for callback." }, status: :bad_request
+      return render json: { error: "Auth token required for callback." }, status: :bad_request
     end
 
     tokens = SpotifyApi.new.fetch_tokens(params[:code])
