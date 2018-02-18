@@ -2,11 +2,22 @@
 
 [![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=shield&circle-token=030f03a14524c5530c203dc2c5f8b0d733389c2f)](https://circleci.com/gh/wcoombs/Amplify-Web)
 
+## Running the Local Server
+1. Navigate to the Web-API repo on your local machine
+2. Run the command ```bundle``` to update project gem files and dependencies
+3. Run the command ```brew services list```
+4. If the postgresql server is stopped, restart it with ```brew services restart postgresql```
+5. Run the local server with ```bin/rails s```*
+
+> \* If you get errors related to an unfound database in your name, it is because we are using local environment variables. Simply navigate into the ```config``` directory and create a ```local_env.yml``` file, copy and paste the contents of the ```local_env.example.yml``` file into this created one. If this still doesn't work, just change the password variable to ```DB_PASSWORD: ''```
+
+> \* If you get errors back on the web side asking to update your local database, run the command ```bin/rails db:migrate RAILS_ENV=development```. There should be some tables created if they were missing. Restart the server after the migration is complete.
+
 ## How to Demo the App Locally
 * For ease of use, use your Mac!
 
 1. Create a room
-* Follow mobile repo README to set up local server and build project (must be on a Mac)
+* Set up the local server (must be on a Mac)
 * Start the mobile simulator (click the run icon)
 * Go into the Amplify-Web repository and run "rails s" to start the server
 * Hit "Create Room" button to be given a room code (remember this!)

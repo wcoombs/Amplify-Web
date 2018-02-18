@@ -19,16 +19,16 @@
     </tr>
   </thead>
   <tbody>
-  <% @room.songs.each do |song| %>
+  <% @playlist_data.each do |song| %>
     <tr>
       <td class="vote_count">
-        <div><i class="triangle up icon submit_vote" data-song-id=<%= song.id %> data-vote-score=1></i></div>
-        <div><%= song.votes.sum(:score) %></div>
-        <div><i class="triangle down icon submit_vote" data-song-id=<%= song.id %> data-vote-score=-1></i></div>
+        <div><i data-song-id=<%= song[:song_id] %> data-vote-score=<%= song[:voter_score] === 1 ? 0 : 1 %> class="<%= song[:voter_score] === 1 ? 'triangle up icon submit_vote amplify_color' : 'triangle up icon submit_vote'%>"></i></div>
+        <div><%= song[:vote_sum] %></div>
+        <div><i data-song-id=<%= song[:song_id] %> data-vote-score=<%= song[:voter_score] === -1 ? 0 : -1 %> class="<%= song[:voter_score] === -1 ? 'triangle down icon submit_vote amplify_color' : 'triangle down icon submit_vote'%>"></i></div>
       </td>
       <td>
-        <div><%= song.title %></div>
-        <div class="artist"><%= song.artist %></div>
+        <div><%= song[:title] %></div>
+        <div class="artist"><%= song[:artist] %></div>
       </td>
     </tr>
   <% end %>
