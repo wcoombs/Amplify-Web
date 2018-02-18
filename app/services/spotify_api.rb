@@ -27,7 +27,7 @@ class SpotifyApi
     options[:headers]["Authorization"] = client_auth_value
     options[:query]["grant_type"] = "authorization_code"
     options[:query]["code"] = code
-    options[:query]["redirect_uri"] = "http://50.71.192.157/spotify_callback"
+    options[:query]["redirect_uri"] = "https://amplifyapp.ca/spotify_callback"
     response = self.class.public_send(:post, "/api/token", options)
     response.parsed_response
   end

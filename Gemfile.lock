@@ -197,6 +197,7 @@ GEM
       net-ssh (>= 2.8.0)
     thor (0.20.0)
     thread_safe (0.3.6)
+    timecop (0.8.1)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
     vcr (4.0.0)
@@ -243,6 +244,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  timecop
   vcr
   web-console (>= 3.3.0)
   webmock

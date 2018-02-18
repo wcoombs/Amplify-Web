@@ -11,10 +11,11 @@ class CallbackController < ActionController::Base
     tokens = SpotifyApi.new.fetch_tokens(params[:code])
     spotify_account = SpotifyAccount.new
     spotify_account.set_tokens(tokens)
-    api = spotify_account.spotify_api
-    me = api.me
+    spotify_api = spotify_account.spotify_api
+    me = spotify_api.me
+
     host = Host.create(email: me["email"])
-    binding.pry
+    spotify_account.update(host: host)
     render json: { api_token: host.api_token }
   end
 end

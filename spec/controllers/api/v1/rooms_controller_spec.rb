@@ -18,14 +18,22 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       expect(Room.last.songs.count).to eq(5)
     end
 
-    it "responds to a json request" do
+    it "401s if the auth token is missing" do
       controller.request.env['HTTP_AUTHORIZATION'] = nil
+
       process(:create, format: :json)
 
       json = JSON.parse(response.body)
-      expect(response).to have_http_status(:ok)
-      expect(json["room_code"]).to be_present
-      expect(Room.last.songs.count).to eq(5)
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "401s if the auth token is missing" do
+      controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+
+      process(:create, format: :json)
+
+      json = JSON.parse(response.body)
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 
@@ -39,6 +47,13 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       .and change { Vote.count }.by(-1)
 
       expect(response).to have_http_status(:ok)
+    end
+
+    it "isn't able to process a delete request without a valid token" do
+      controller.request.env['HTTP_AUTHORIZATION'] = nil
+      process(:destroy, format: :json, params: { id: room_a.id })
+
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end
