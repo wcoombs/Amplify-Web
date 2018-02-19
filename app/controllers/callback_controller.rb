@@ -1,11 +1,13 @@
 class CallbackController < ActionController::Base
   def spotify_callback
     if params[:error].present?
-      return render json: { error: params[:error] }, status: :bad_request
+      @response_params = "?error_message=#{params[:error]}"
+      return render :spotify_callback
     end
 
     unless params[:code].present?
-      return render json: { error: "Auth token required for callback." }, status: :bad_request
+      @response_params = "?error_message=missing-auth-code"
+      return render :spotify_callback
     end
 
     tokens = SpotifyApi.new.fetch_tokens(params[:code])
@@ -16,6 +18,6 @@ class CallbackController < ActionController::Base
 
     host = Host.create(email: me["email"])
     spotify_account.update(host: host)
-    render json: { api_token: host.api_token }, status: :ok
+    @response_params = "?api_token=#{host.api_token}"
   end
 end
