@@ -14,10 +14,13 @@ class CallbackController < ActionController::Base
     spotify_account = SpotifyAccount.new
     spotify_account.set_tokens(tokens)
     spotify_api = spotify_account.spotify_api
-    me = spotify_api.me
+    host = Host.new(email: spotify_api.me["email"])
 
-    host = Host.create(email: me["email"])
-    spotify_account.update(host: host)
-    @response_params = "?api_token=#{host.api_token}&access_token=#{spotify_account.access_token}".html_safe
+    if host.save
+      spotify_account.update(host: host)
+      @response_params = "?api_token=#{host.api_token}&access_token=#{spotify_account.access_token}".html_safe
+    else
+      @response_params = "?error_message=error-creating-host"
+    end
   end
 end
