@@ -14,7 +14,13 @@ class CallbackController < ActionController::Base
     spotify_account = SpotifyAccount.new
     spotify_account.set_tokens(tokens)
     spotify_api = spotify_account.spotify_api
-    host = Host.new(email: spotify_api.me["email"])
+
+    email = spotify_api.me["email"]
+    host = Host.find_by(email: email)
+
+    unless host
+      host = Host.new(email: email)
+    end
 
     if host.save
       spotify_account.update(host: host)
