@@ -18,15 +18,16 @@ class CallbackController < ActionController::Base
     email = spotify_api.me["email"]
     host = Host.find_by(email: email)
 
-    unless host
+    if host.nil?
       host = Host.new(email: email)
+      host.save
     end
 
-    if host.save
+    # if host.save
       spotify_account.update(host: host)
       @response_params = "?api_token=#{host.api_token}&access_token=#{spotify_account.access_token}".html_safe
-    else
-      @response_params = "?error_message=error-creating-host"
-    end
+    # else
+    #   @response_params = "?error_message=error-creating-host"
+    # end
   end
 end
