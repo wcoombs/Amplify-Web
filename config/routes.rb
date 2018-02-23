@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       namespace 'v1' do
         resources :rooms, only: [:create, :destroy, :index]
         resources :hosts, only: [:create]
+
+        get '/refresher/refresh_access_token', to: 'refresher#access_token' , as: :refresh_access
       end
     end
   end

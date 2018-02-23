@@ -32,6 +32,16 @@ class SpotifyApi
     response.parsed_response
   end
 
+  def refresh_access_tokens(refresh_token)
+    self.class.base_uri "https://accounts.spotify.com"
+    options = { headers: {}, query: {} }
+    options[:headers]["Authorization"] = client_auth_value
+    options[:query]["grant_type"] = "refresh_token"
+    options[:query]["refresh_token"] = refresh_token
+    response = self.class.public_send(:post, "/api/token", options)
+    response.parsed_response
+  end
+
   private
 
   def client_auth_value

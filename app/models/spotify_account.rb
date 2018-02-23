@@ -9,6 +9,13 @@ class SpotifyAccount < ApplicationRecord
     }
   end
 
+  def set_access_token(access_token)
+    self.attributes = {
+        access_token: access_token["access_token"],
+        expires_at: DateTime.current + access_token["expires_in"].to_i.seconds
+    }
+  end
+
   def spotify_api
     @spotify_api ||= SpotifyApi.new(self)
   end
