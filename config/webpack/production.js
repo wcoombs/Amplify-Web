@@ -1,3 +1,13 @@
-const environment = require('./environment')
+prod_modules = {
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.min.js',
+      vue_resource: 'vue-resource/dist/vue-resource',
+    }
+  }
+}
 
-module.exports = environment.toWebpackConfig()
+const environment = require('./environment')
+const merge = require('webpack-merge')
+
+module.exports = merge(environment.toWebpackConfig(), prod_modules)
