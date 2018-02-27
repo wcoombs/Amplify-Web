@@ -16,7 +16,6 @@
       <tr>
         <th class="center aligned">Votes</th>
         <th>Song</th>
-        <th>Artist</th>
      </tr>
     </thead>
     <tbody v-for="song in songs">
@@ -28,9 +27,7 @@
         </td>
         <td>
           {{ song.title }}
-        </td>
-        <td>
-          {{ song.artist }}
+          <div class="artist">{{ song.artist }}</div>
         </td>
       </tr>
     </tbody>
