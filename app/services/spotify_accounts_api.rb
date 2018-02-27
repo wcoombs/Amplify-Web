@@ -13,7 +13,7 @@ class SpotifyAccountsApi
     })
   end
 
-  def refresh_access_tokens!(refresh_token)
+  def fetch_access_token!(refresh_token)
     response = send_request(:post, "/api/token", {
       query: { grand_type: "refresh_token", refresh_token: refresh_token }
     })
