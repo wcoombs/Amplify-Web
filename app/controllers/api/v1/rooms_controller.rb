@@ -19,6 +19,15 @@ module Api
         end
       end
 
+      def index
+        return render json: { error: "No Room exists for user" }, status: :bad_request if !@host.room.present?
+
+        respond_to do |format|
+          format.json { render json: { id: @host.room.id, room_code: @host.room.room_code }, status: :ok }
+          format.html { head :forbidden }
+        end
+      end
+
       def destroy
         Room.find(params[:id]).destroy
 
