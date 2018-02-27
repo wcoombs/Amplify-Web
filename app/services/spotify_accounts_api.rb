@@ -8,31 +8,28 @@ class SpotifyAccountsApi
   base_uri "https://accounts.spotify.com"
 
   def fetch_tokens!(code)
-    response = send_request(:post, "api/token", {
-      query: { grant_type: "authorization_code", code: code, redirect_uri: Secrets[:spotify_redirect_uri] }
+    response = send_request(:post, "/api/token", {
+      query: { grant_type: "authorization_code", code: code, redirect_uri: Secrets[:spotify][:redirect_uri] }
     })
-    raise "something" if response.code != 200
-    response
   end
 
   def refresh_access_tokens!(refresh_token)
-    response = send_request(:post, "api/token" {
+    response = send_request(:post, "/api/token", {
       query: { grand_type: "refresh_token", refresh_token: refresh_token }
     })
-    raise "something" if response.code != 200
-    response
   end
 
   private
 
   def client_auth_value
-    ("Basic " + Base64.strict_encode64(Secrets[:spotify_client_id] + ":" + Secrets[:spotify_client_secret]))
+    ("Basic " + Base64.strict_encode64(Secrets[:spotify][:client_id] + ":" + Secrets[:spotify][:client_secret]))
   end
 
   def send_request(action, endpoint, options)
     options[:headers] ||= {}
     options[:headers]["Authorization"] = client_auth_value
     response = self.class.public_send(:post, endpoint, options)
+    raise "bad response from spotify accounts api" if response.code != 200
     response.parsed_response
   end
 end

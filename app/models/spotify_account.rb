@@ -17,6 +17,6 @@ class SpotifyAccount < ApplicationRecord
   end
 
   def spotify_api
-    @spotify_api ||= SpotifyApi.new(self)
+    @spotify_api ||= SpotifyApiV1.new(self)
   end
 end

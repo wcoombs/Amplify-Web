@@ -31,7 +31,7 @@ class CallbackController < ActionController::Base
     else
       @response_params = "?error_message=error-creating-host"
     end
-  rescue
-    puts "do something"
+  rescue StandardError => error
+    Rails.logger.error(error)
   end
 end

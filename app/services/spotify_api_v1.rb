@@ -7,19 +7,17 @@ class SpotifyApiV1
   read_timeout 10
   base_uri "https://api.spotify.com/v1"
 
-  def initialize(spotify_account = nil)
-    if spotify_account
-      @access_token = spotify_account.access_token
-    end
+  def initialize(spotify_account)
+    @access_token = spotify_account.access_token
   end
 
   def search(query: nil, type: "track")
     options = { query: { q: query, type: type, market: "US", limit: 1, offset: 1 } }
-    send_api_request(:get, "/search", options)
+    send_request(:get, "/search", options)
   end
 
   def me
-    send_api_request(:get, "/me", {})
+    send_request(:get, "/me", {})
   end
 
   private
@@ -31,6 +29,7 @@ class SpotifyApiV1
     options[:headers]["Authorization"] = "Bearer #{@access_token}"
     options[:query] ||= {}
     response = self.class.public_send(action, endpoint, options)
+    raise "bad response from spotify v1 api" if response.code != 200
     response.parsed_response
   end
 end
