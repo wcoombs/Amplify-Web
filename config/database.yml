@@ -14,7 +14,9 @@ test:
 
 production:
   <<: *default
-  database: amplify_production
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
 
 staging:
   <<: *default
