@@ -35,11 +35,10 @@
 </div>
 
 <script type="text/javascript">
-  var playlistVue = new Vue({
+  const playlistVue = new Vue({
     el: '#show',
     data: {
-      songs: <%= @playlist_data.to_json.html_safe %>,
-      active: true
+      songs: <%= @playlist_data.to_json.html_safe %>
     },
     methods: {
       vote: function(value, song) {
@@ -49,17 +48,22 @@
           success: function(data) {
             song.total_score = data.new_score;
             song.voter_score = value;
+            playlistVue.sort_playlist();
           }
         });
       },
       reload_playlist: function() {
-        console.log("holler");
         Rails.ajax({
           type: "GET",
           url: '<%= @room.id %>',
           success: function(data) {
             playlistVue.songs = data.playlist
           }
+        });
+      },
+      sort_playlist: function() {
+        playlistVue.songs.sort(function(a,b) {
+          return b.total_score - a.total_score;
         });
       }
     }
