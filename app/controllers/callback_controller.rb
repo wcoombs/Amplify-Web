@@ -19,7 +19,8 @@ class CallbackController < ActionController::Base
 
     if host
       host.set_api_token!
-      host.spotify_account.set_tokens(tokens).save
+      host.spotify_account.set_tokens(tokens)
+      host.spotify_account.save
     else
       host = Host.new(email: email, spotify_account: spotify_account)
       spotify_account.update(host: host)
