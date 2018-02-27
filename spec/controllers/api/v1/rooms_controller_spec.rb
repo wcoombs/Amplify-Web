@@ -37,6 +37,36 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
     end
   end
 
+  describe "GET#index" do
+    it "responds to a json request" do
+      process(:create, format: :json)
+      process(:index, format: :json)
+
+      json = JSON.parse(response.body)
+      expect(response).to have_http_status(:ok)
+      expect(json["room_code"]).to be_present
+      expect(Room.last.songs.count).to eq(5)
+    end
+
+    it "401s if the auth token is missing" do
+      controller.request.env['HTTP_AUTHORIZATION'] = nil
+
+      process(:create, format: :json)
+
+      json = JSON.parse(response.body)
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "401s if the auth token is missing" do
+      controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+
+      process(:create, format: :json)
+
+      json = JSON.parse(response.body)
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
   describe "DELETE#destroy" do
     it "responds to a delete request" do
       expect do
