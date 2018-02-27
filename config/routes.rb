@@ -12,10 +12,15 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :lead_signups, only: [:new, :create]
   resources :voter_signups, only: [:new, :create]
   resources :playlist, only: [:show] do
     resources :vote, only: [:update]
+  end
+
+  controller :spotify do
+    get :search
   end
 
   get '/spotify_callback', to: 'callback#spotify_callback', as: :spotify_callback
