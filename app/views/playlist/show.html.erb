@@ -6,7 +6,7 @@
   </div>
   <div class="right menu">
     <div class="item">
-      <i class="refresh up icon" @click=reload_playlist></i>
+      <i class="refresh up icon" @click=reloadPlaylist></i>
     </div>
   </div>
 </div>
@@ -48,11 +48,11 @@
           success: function(data) {
             song.total_score = data.new_score;
             song.voter_score = value;
-            playlistVue.sort_playlist();
+            playlistVue.sortPlaylist();
           }
         });
       },
-      reload_playlist: function() {
+      reloadPlaylist: function() {
         Rails.ajax({
           type: "GET",
           url: '<%= @room.id %>',
@@ -61,7 +61,7 @@
           }
         });
       },
-      sort_playlist: function() {
+      sortPlaylist: function() {
         playlistVue.songs.sort(function(a,b) {
           return b.total_score - a.total_score;
         });
