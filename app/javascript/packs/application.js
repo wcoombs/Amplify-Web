@@ -7,13 +7,15 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 import $ from 'jquery';
-import "application.css";
 import Rails from 'rails-ujs'
+import Vue from 'vue';
+import "application.css";
 import "inverted-logo.svg";
 
 window.$ = $;
 window.jQuery = $;
 window.Rails = Rails;
+window.Vue = Vue;
 
 Rails.start();
 require('semantic-ui-css/semantic.js');
