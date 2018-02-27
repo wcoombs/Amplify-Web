@@ -10,7 +10,7 @@ module Api
           Host.find_by(api_token: token)
         end
 
-        render json: { error: 'Sorry amigo, doors locked' }, status: :unauthorized unless @host
+        render json: { error: 'Invalid or missing api token' }, status: :unauthorized unless @host
       end
     end
   end
