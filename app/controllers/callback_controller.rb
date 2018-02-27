@@ -10,7 +10,7 @@ class CallbackController < ActionController::Base
       return render :spotify_callback
     end
 
-    tokens = SpotifyApi.new.fetch_tokens(params[:code])
+    tokens = SpotifyAccountsApi.new.fetch_tokens!(params[:code])
     spotify_account = SpotifyAccount.new
     spotify_account.set_tokens(tokens)
     spotify_api = spotify_account.spotify_api
@@ -31,5 +31,7 @@ class CallbackController < ActionController::Base
     else
       @response_params = "?error_message=error-creating-host"
     end
+  rescue StandardError => error
+    Rails.logger.error(error)
   end
 end
