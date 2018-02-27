@@ -1,8 +1,11 @@
-<div class="ui fixed inverted menu">
+<div class="ui fixed inverted secondary menu">
   <div class="ui container">
     <div class="header item">
       <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
       Amplify
+    </div>
+    <div class="right floated header item">
+      <i class="add circle icon amplify_color suggest_song"></i>
     </div>
   </div>
 </div>
@@ -35,6 +38,22 @@
   </tbody>
 </table>
 
+<div class="ui basic modal">
+  <div class="header">Suggest a song</div>
+  <div class="content">
+    <div class="ui search"> <!--can do more with this once Spotify search is implemented-->
+      <div class="ui icon input">
+        <input class="prompt" type="text" placeholder="Search...">
+        <i class="search icon amplify_color" style="line-height: 0.8"></i>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui cancel inverted button">Cancel</div>
+    <div class="ui ok inverted button">Submit</div>
+  </div>
+</div>
+
 <script type="text/javascript">
   $('.submit_vote').click(function( event ){
     var score = event.target.getAttribute("data-vote-score");
@@ -47,4 +66,17 @@
       }
     });
   });
+
+  $('.suggest_song').click(function(event) {
+      $('.ui.basic.modal').modal('setting','scale').modal({blurring: true}).modal('show');
+  });
+
+  $('.ui.search')
+      .search({
+          apiSettings: {
+
+          }
+      });
+
+
 </script>
