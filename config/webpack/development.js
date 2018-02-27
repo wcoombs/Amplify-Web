@@ -1,3 +1,14 @@
-const environment = require('./environment')
+dev_modules = {
+  resolve: {
+    alias: {
+      jquery: 'jquery/src/jquery',
+      vue: 'vue/dist/vue.js',
+      vue_resource: 'vue-resource/dist/vue-resource',
+    }
+  }
+}
 
-module.exports = environment.toWebpackConfig()
+const environment = require('./environment')
+const merge = require('webpack-merge')
+
+module.exports = merge(environment.toWebpackConfig(), dev_modules)
