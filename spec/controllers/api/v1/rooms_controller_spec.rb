@@ -4,36 +4,46 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_a) { rooms(:room_a) }
   let(:host_a) { hosts(:host_a) }
 
-  before do
-    controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
-  end
-
   describe "POST#create" do
-    it "responds to a json request" do
-      process(:create, format: :json)
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
+      }
 
-      json = JSON.parse(response.body)
-      expect(response).to have_http_status(:ok)
-      expect(json["room_code"]).to be_present
-      expect(Room.last.songs.count).to eq(5)
+      it "responds to a json request" do
+        process(:create, format: :json)
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:ok)
+        expect(json["room_code"]).to be_present
+        expect(Room.last.songs.count).to eq(5)
+      end
     end
 
-    it "401s if the auth token is missing" do
-      controller.request.env['HTTP_AUTHORIZATION'] = nil
+    context "it doesn't have an api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+      }
 
-      process(:create, format: :json)
+      it "401s" do
+        process(:create, format: :json)
 
-      json = JSON.parse(response.body)
-      expect(response).to have_http_status(:unauthorized)
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
 
-    it "401s if the auth token is missing" do
-      controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
 
-      process(:create, format: :json)
+      it "401s" do
+        process(:create, format: :json)
 
-      json = JSON.parse(response.body)
-      expect(response).to have_http_status(:unauthorized)
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
 
@@ -68,22 +78,34 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   end
 
   describe "DELETE#destroy" do
-    it "responds to a delete request" do
-      expect do
-        process(:destroy, format: :json, params: { id: room_a.id })
-      end.to change { Room.count }.by(-1)
-      .and change { Song.count }.by(-2)
-      .and change { Voter.count }.by(-1)
-      .and change { Vote.count }.by(-1)
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
+      }
 
-      expect(response).to have_http_status(:ok)
+      it "performs to a delete request" do
+        expect do
+          process(:destroy, format: :json, params: { id: room_a.id })
+        end.to change { Room.count }.by(-1)
+        .and change { Song.count }.by(-2)
+        .and change { Voter.count }.by(-1)
+        .and change { Vote.count }.by(-1)
+
+        expect(response).to have_http_status(:ok)
+      end
     end
 
-    it "isn't able to process a delete request without a valid token" do
-      controller.request.env['HTTP_AUTHORIZATION'] = nil
-      process(:destroy, format: :json, params: { id: room_a.id })
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
 
-      expect(response).to have_http_status(:unauthorized)
+      it "does not perform the delete request" do
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+        process(:destroy, format: :json, params: { id: room_a.id })
+
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
 end

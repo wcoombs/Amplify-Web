@@ -12,5 +12,7 @@ class VoteController < ApplicationController
 
     vote = Vote.find_or_initialize_by(voter: voter, song: song)
     vote.update(score: params[:vote])
+
+    render json: { new_score: song.votes.sum(:score) }, status: :ok
   end
 end

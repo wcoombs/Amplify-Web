@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token?code=fakeauthcode&grant_type=authorization_code&redirect_uri=https://amplifyapp.ca/spotify_callback
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Authorization:
+      - Basic ZWNhODUzYzcwYmMyNGIyZDg0ZjliYmQ1MjU1NDA3NGI6NWZhZWQ0YjRlNWNjNGM3Nzg0ZWFjNjVhMTE3NmZmZDI=
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 27 Feb 2018 20:17:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '74'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=600
+    body:
+      encoding: UTF-8
+      string: '{"error":"invalid_grant","error_description":"Invalid authorization
+        code"}'
+    http_version: 
+  recorded_at: Sat, 17 Feb 2018 06:00:00 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 27 Feb 2018 20:17:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '99'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=600
+      Www-Authenticate:
+      - Bearer realm="spotify", error="invalid_request", error_description="Only valid
+        bearer authentication supported"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Origin, Content-Type, Retry-After
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "error": {
+            "status": 400,
+            "message": "Only valid bearer authentication supported"
+          }
+        }
+    http_version: 
+  recorded_at: Sat, 17 Feb 2018 06:00:00 GMT
+recorded_with: VCR 4.0.0
