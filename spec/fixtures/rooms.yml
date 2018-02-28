@@ -1,5 +1,7 @@
 room_a:
+  host: host_a
   room_code: 1141
 
 room_b:
+  host: host_b
   room_code: 3141

@@ -11,6 +11,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       }
 
       it "responds to a json request" do
+        Room.delete_all
         process(:create, format: :json)
 
         json = JSON.parse(response.body)
@@ -40,6 +41,63 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
       it "401s" do
         process(:create, format: :json)
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
+  describe "GET#index" do
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
+      }
+
+      it "responds to a json request with a room" do
+        process(:index, format: :json)
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:ok)
+        expect(json["room_data"]).to be_present
+      end
+    end
+
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
+      }
+
+      it "responds to a json request without a room" do
+        Room.delete_all
+        process(:index, format: :json)
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:ok)
+        expect(json["room_data"]).to eq []
+      end
+    end
+
+    context "it doesn't have an api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+      }
+
+      it "401s" do
+        process(:index, format: :json)
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
+
+      it "401s" do
+        process(:index, format: :json)
 
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:unauthorized)
