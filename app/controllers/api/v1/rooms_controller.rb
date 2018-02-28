@@ -20,11 +20,10 @@ module Api
       end
 
       def index
-        binding.pry
-        return render json: { error: "No Room exists for user" }, status: :bad_request unless @host.room.present?
-
+        @response_object = @host.room.present? ? { id: @host.room.id, room_code: @host.room.room_code } : ""
+        
         respond_to do |format|
-          format.json { render json: { id: @host.room.id, room_code: @host.room.room_code }, status: :ok }
+          format.json { render json: { room_data: @response_object }, status: :ok }
           format.html { head :forbidden }
         end
       end
