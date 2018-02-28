@@ -49,7 +49,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
   describe "GET#index" do
     it "responds to a json request" do
-      process(:create, format: :json)
       process(:index, format: :json)
 
       json = JSON.parse(response.body)
