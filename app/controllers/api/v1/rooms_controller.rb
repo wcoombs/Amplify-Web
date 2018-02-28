@@ -20,11 +20,8 @@ module Api
       end
 
       def index
-        room = []
-        room.push(id: @host.room.id, room_code: @host.room.room_code) if @host.room.present?
-        
         respond_to do |format|
-          format.json { render json: { room_data: room }, status: :ok }
+          format.json { render json: { id: @host.room&.id, room_code: @host.room&.room_code }, status: :ok }
           format.html { head :forbidden }
         end
       end

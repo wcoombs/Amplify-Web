@@ -59,7 +59,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:ok)
-        expect(json["room_data"]).to be_present
+        expect(json["room_code"]).to be_present
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:ok)
-        expect(json["room_data"]).to eq []
+        expect(json["room_code"]).to be nil
       end
     end
 
