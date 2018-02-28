@@ -11,6 +11,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       }
 
       it "responds to a json request" do
+        Room.delete_all
         process(:create, format: :json)
 
         json = JSON.parse(response.body)
