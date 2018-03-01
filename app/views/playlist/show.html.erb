@@ -60,6 +60,7 @@
     },
     methods: {
       vote: function(value, song) {
+        value = (song.voter_score !== value) ? value : 0;
         Rails.ajax({
           type: "PUT",
           url: '/playlist/' + '<%= @room.id %>' + '/vote/' + song.id + '?vote=' + value,
