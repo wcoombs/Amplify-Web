@@ -18,5 +18,9 @@ Rails.application.routes.draw do
     resources :vote, only: [:update]
   end
 
+  controller :spotify do
+    get '/playlist/:id/search', to: 'spotify#search', as: :search
+  end
+
   get '/spotify_callback', to: 'callback#spotify_callback', as: :spotify_callback
 end

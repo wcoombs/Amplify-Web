@@ -7,6 +7,7 @@
   <div class="right menu">
     <div class="item">
       <i class="refresh up icon" @click=reloadPlaylist></i>
+      <i class="add circle icon amplify_color suggest_song"></i>
     </div>
   </div>
 </div>
@@ -34,8 +35,25 @@
   </table>
 </div>
 
+<div class="ui basic small modal">
+  <div class="amplify_color header">Suggest a song</div>
+  <div class="content">
+    <div class="ui search">
+      <div class="ui icon input">
+        <input class="prompt" type="text" placeholder="Search...">
+        <i class="search icon amplify_color"></i>
+      </div>
+      <div class="results"></div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui pink basic cancel inverted button">Cancel</div> <!--amplify_color doesn't work here...?-->
+    <div class="ui pink ok inverted button">Submit</div>
+  </div>
+</div>
+
 <script type="text/javascript">
-  const playlistVue = new Vue({
+    const playlistVue = new Vue({
     el: '#show',
     data: {
       songs: <%= @playlist_data.to_json.html_safe %>
@@ -69,4 +87,33 @@
       }
     }
   });
+
+  $('.suggest_song').click(function(event) {
+      $('.ui.basic.small.modal')
+          .modal('setting','scale')
+          .modal({blurring: true})
+          .modal('show');
+  });
+
+  $('.ui.search')
+      .search({
+          apiSettings: {
+            onResponse: function(spotifyResponse) {
+              let response = {
+                results: {}
+              };
+              $.each(spotifyResponse.items, function(index, item) {
+                  response.results.push({
+                      title: item.name,
+                  });
+              });
+              return response;
+            },
+              url: '/playlist/' + '<%= @room.id %>' + '/search' + '?q={query}',
+          },
+          minCharacters: 2,
+
+      });
+
+
 </script>
