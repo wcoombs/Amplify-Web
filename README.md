@@ -19,7 +19,10 @@
 - `bundle exec rake db:migrate` to run any outstanding migrations
 - create a local secrets file `config/secrets.yml`, we have an [example secrets file](https://github.com/wcoombs/Amplify-Web/blob/master/config/secrets.example.yml) that can be used as a template, to create your development copy.
   - Use `rake secret` if you want to generate your own `secret_key_base` for your local secrets file
-- create a local environment file `config/local_env.yml`, we have an [example local env file](https://github.com/wcoombs/Amplify-Web/blob/master/config/local_env.example.yml) that can be used as a template to create your own copy.  This file was created as a necessity for linux users in our group who's dev environments were not setting the default database connection details, so now this file is required for both mac and linux users.  If you're using linux (please don't) you'll have to modify the test connection details to match development.  But that's only necessary if you run tests, so far only one of our linux users have noticed this.
+- create a local environment file `config/local_env.yml`, we have an [example local env file](https://github.com/wcoombs/Amplify-Web/blob/master/config/local_env.example.yml) that can be used as a template to create your own copy. Fill in the appropriate values for your envrionment according to what the example keys describe.
+  - `DB_NAME` is the name of the development database for your environment
+  - `DB_USER` is your postgresql user
+  - `DB_PASSWORD` is the password for your postgresql user
 
 #### After pulling the latest from master always:
 - `bundle` to fetch any gems that may have been added to the project
