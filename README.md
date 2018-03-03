@@ -35,6 +35,8 @@ Or if you want to run webpacker separately (faster for asset compilation, and cs
 - `webpack-dev-server` to start the webpack development server
 - after the webpack dev server is up `rails s`
 
+> \* A quick fix for database errors related to junk data `bundle exec rake db:reset RAILS_ENV=environment` where `environment` is test/development/staging (never production), `db:reset` will drop the database, then run `create`, `schema:load`, and finally `seed` so it's lazy command to run if you do not care whatsoever about the information in the database.
+
 > \* If you get errors related to an unfound database in your name, it is because we are using local environment variables. Simply navigate into the ```config``` directory and create a ```local_env.yml``` file, copy and paste the contents of the ```local_env.example.yml``` file into this created one. If this still doesn't work, just change the password variable to ```DB_PASSWORD: ''```
 
 > \* If you get errors back on the web side asking to update your local database, run the command ```bin/rails db:migrate RAILS_ENV=development```. There should be some tables created if they were missing. Restart the server after the migration is complete.
