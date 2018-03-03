@@ -13,6 +13,12 @@
 
 > \* If you get errors back on the web side asking to update your local database, run the command ```bin/rails db:migrate RAILS_ENV=development```. There should be some tables created if they were missing. Restart the server after the migration is complete.
 
+> \* If you encounter any errors mentioning webpacker, packs, manifest, or any thing javascripty
+> - Be sure to run `yarn install` in the project directory to install any javascript dependencies.
+> - If `yarn install` fails make sure you have npm installed and up to date, and then do `npm install` in the project directory.
+
+> \* If you continue to have trouble getting the project to run and are evaluating us for grading purposes, email rob @ robert.laurin89@gmail.com
+ 
 ## How to Demo the App Locally
 * For ease of use, use your Mac!
 
