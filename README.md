@@ -1,13 +1,39 @@
-# Amplify (WebAPI)
+# [Amplify](https://amplifyapp.ca) (WebAPI)
 
 [![CircleCI](https://circleci.com/gh/wcoombs/Amplify-Web.svg?style=shield&circle-token=030f03a14524c5530c203dc2c5f8b0d733389c2f)](https://circleci.com/gh/wcoombs/Amplify-Web)
 
-## Running the Local Server
-1. Navigate to the Web-API repo on your local machine
-2. Run the command ```bundle``` to update project gem files and dependencies
-3. Run the command ```brew services list```
-4. If the postgresql server is stopped, restart it with ```brew services restart postgresql```
-5. Run the local server with ```bin/rails s```*
+## Running Amplify Web in a local development environment
+
+#### First run checklist: *(Tailored to Mac users)*
+- Clone the repo `git clone git@github.com:wcoombs/Amplify-Web.git`
+- install the approriate ruby version (`2.5.0`) also listed in `.ruby-version` file at the root of the project
+  - You can use any ruby version manager of your choosing, we've been using [RVM](https://rvm.io/rvm/install) for local development and I choose to use `RBENV` for the production server (play nicely with capistrano)
+  - If you use `RVM` installing ruby 2.5.0 is as simple as `rvm install 2.5.0` and the `rvm use 2.5.0` to set that version.
+  - Word of caution when use ruby version managers is that some shells behave in unexpected ways when switching between folders and may unset the current version of ruby being used.  I won't get into further details here about managing that.
+- install `gem install bundle` bundler will manage our projects gem dependencies
+- `npm install` to install yarn (only use npm to install yarn, then use yarn going forward)
+- `yarn install` to install our javascript dependencies 
+- `brew install postgresql` to install postgres
+- `brew services list` and confirm that *postgresql* is `started`
+- `bundle exec rake db:create` to create our database
+- `bundle exec rake db:migrate` to run any outstanding migrations
+- create a local secrets file `config/secrets.yml`, we have an [example secrets file](https://github.com/wcoombs/Amplify-Web/blob/master/config/secrets.example.yml) that can be used as a template, to create your development copy.
+  - Use `rake secret` if you want to generate your own `secret_key_base` for your local secrets file
+- create a local environment file `config/local_env.yml`, we have an [example local env file](https://github.com/wcoombs/Amplify-Web/blob/master/config/local_env.example.yml) that can be used as a template to create your own copy.  This file was created as a necessity for linux users in our group who's dev environments were not setting the default database connection details, so now this file is required for both mac and linux users.  If you're using linux (please don't) you'll have to modify the test connection details to match development.  But that's only necessary if you run tests, so far only one of our linux users have noticed this.
+
+#### After pulling the latest from master always:
+- `bundle` to fetch any gems that may have been added to the project
+- `bundle exec rake db:migrate` to run any new migrations
+- `yarn install` to fetch any new javascript dependencies
+
+#### Running the rails server
+There are two options for running the rails server
+- Simply `rails s` short for `rails server`
+
+Or if you want to run webpacker separately (faster for asset compilation, and css hot reloading)
+
+- `webpack-dev-server` to start the webpack development server
+- after the webpack dev server is up `rails s`
 
 > \* If you get errors related to an unfound database in your name, it is because we are using local environment variables. Simply navigate into the ```config``` directory and create a ```local_env.yml``` file, copy and paste the contents of the ```local_env.example.yml``` file into this created one. If this still doesn't work, just change the password variable to ```DB_PASSWORD: ''```
 
