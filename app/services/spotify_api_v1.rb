@@ -8,11 +8,11 @@ class SpotifyApiV1
   base_uri "https://api.spotify.com/v1"
 
   def initialize(spotify_account)
-    @access_token = 'BQC12mB9Mwf9OgOCZ55m8CpnAPEyxcRpub8flWxN0lDe_iyGwH9MQu7fs7RGNKUE2pO5aueaIFYBtTi6djngke0sfOUFZ7slgtAIcJiYMl2KvyxviABzvV5E5dOqlwILInO3umjmTadzotuk1cxVA9WusBKRUpADW-YNpA' #spotify_account.access_token
+    @access_token = 'BQCY1Is-7XX7JTHx-uMetJYB2sC2rhLD0vG8ilK193nrkuusHmVZjUjYf5WX6MUdEld1LeDsobNmddD9g3roCZB8zLTuOvhTOfxb9_bTnTIbJiNkkTvRmk8WD4klknum3MWliAy_Jz541NKm3SEYzcRlMrIbJZ9fYeds5Q' #spotify_account.access_token
   end
 
-  def search(query: nil, type: "track")
-    options = { query: { q: query, type: type, market: "US", limit: 1, offset: 1 } }
+  def search(query: nil, type: "track,artist")
+    options = { query: { q: query, type: type, market: "US", limit: 10 } }
     send_request(:get, "/search", options)
   end
 

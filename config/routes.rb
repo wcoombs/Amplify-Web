@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   controller :spotify do
     get '/playlist/:id/search', to: 'spotify#search', as: :search
+    get '/playlist/id/suggest', to: 'spotify#suggest', as: :suggest
   end
 
   get '/spotify_callback', to: 'callback#spotify_callback', as: :spotify_callback

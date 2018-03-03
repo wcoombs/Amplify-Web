@@ -87,3 +87,8 @@ i.icon {
   margin: 0.25rem 0.25rem 0rem 0.25rem !important;
   font-size: 2rem !important;
 }
+
+.ui.search .results {
+  overflow-y: auto;
+  max-height: 300px;
+}
