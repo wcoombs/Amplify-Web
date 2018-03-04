@@ -12,6 +12,7 @@ class SpotifyController < ApplicationController
 
   def set_api_by_host
     voter = Voter.find(session[:voter_id])
+    @spotify_api = voter.room.host.spotify_account.spotify_api
     unless @spotify_account.present?
       flash[:error] = "Search not available: the host has not linked their Spotify account"
       #render something
