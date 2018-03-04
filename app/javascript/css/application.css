@@ -90,5 +90,9 @@ i.icon {
 
 .ui.search .results {
   overflow-y: auto;
-  max-height: 300px;
+  max-height: 500px;
+}
+
+.ui.basic.small.modal {
+    margin-top: -300px !important;
 }

@@ -27,9 +27,6 @@ class PlaylistController < ApplicationController
         artist: params[:artist],
         duration: params[:duration],
         uri: params[:uri])
-    unless new_song.save?
-      flash[:error] = "Error saving song!"
-    end
   end
 
   private
