@@ -8,10 +8,6 @@ class SpotifyController < ApplicationController
     puts "oh no everything went horrible wrong!"
   end
 
-  def suggest
-    #save the selected song to the database here
-  end
-
   private
 
   def set_api_by_host

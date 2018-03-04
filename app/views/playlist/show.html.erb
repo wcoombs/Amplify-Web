@@ -85,9 +85,14 @@
           return b.total_score - a.total_score;
         });
       },
-      suggestSong: function() {
+      suggestSong: function(item) {
         Rails.ajax({
           type: "POST",
+            data: {
+              uri: item.uri,
+                title: item.title,
+                artist: item.artist,
+            },
           url: '/playlist/' + '<%= @room.id %>' + '/suggest', //need the song to post here
           success: function(data) {
               playlistVue.songs = data.playlist
@@ -116,15 +121,24 @@
                       id: item.id,
                       title: item.name,
                       description: item.artists[0].name,
+                      uri: item.uri,
                   });
               });
               return response;
             },
-            onSelect: function(event) {
-              //this is probably where you'll update controller currentSong variable
-              //and submit what's in that variable on submit
-            },
               url: '/playlist/' + '<%= @room.id %>' + '/search' + '?q={query}',
+          },
+          onSelect: function(event) {
+              Rails.ajax({
+                  type: "POST",
+                  url: '/playlist/' + '<%= @room.id %>' + '/suggest?title='+event.title+'&artist='+event.description, //this does not work currently with special characters
+                  //data: song,
+                  dataType: "json",
+                  success: function(data) {
+                      playlistVue.songs = data.playlist;
+                      location.reload();
+                  }
+              });
           },
           minCharacters: 2,
           searchDelay: 1000,
