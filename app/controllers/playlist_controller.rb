@@ -1,5 +1,4 @@
 class PlaylistController < ApplicationController
-  helper_method :has_voted
 
   def show
     @room = Room.find_by_id(params[:id])
@@ -22,8 +21,12 @@ class PlaylistController < ApplicationController
 
   def suggest
     room = Room.find_by_id(params[:id])
-    #save the selected song to the database here
-    new_song = Song.create(room: room, title: params[:title], artist: params[:artist])
+    new_song = Song.create(
+        room: room,
+        title: params[:title],
+        artist: params[:artist],
+        duration: params[:duration],
+        uri: params[:uri])
     unless new_song.save?
       flash[:error] = "Error saving song!"
     end
