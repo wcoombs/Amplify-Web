@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_a) { rooms(:room_a) }
   let(:host_a) { hosts(:host_a) }
+  let(:host_c) { hosts(:host_c) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -18,6 +19,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         expect(response).to have_http_status(:ok)
         expect(json["room_code"]).to be_present
         expect(Room.last.songs.count).to eq(5)
+        expect change { Voter.count }.by(1)
       end
     end
 
@@ -51,7 +53,8 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   describe "GET#index" do
     context "it has a valid api token" do
       before {
-        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
+        process(:create, format: :json)
       }
 
       it "responds to a json request with a room" do
@@ -60,6 +63,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:ok)
         expect(json["room_code"]).to be_present
+        expect(json["voter_id"]).to be_present
       end
     end
 
@@ -131,6 +135,36 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       it "does not perform the delete request" do
         controller.request.env['HTTP_AUTHORIZATION'] = nil
         process(:destroy, format: :json, params: { id: room_a.id })
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
+  describe "GET#show" do
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
+        process(:create, format: :json)
+      }
+
+      it "shows the playlist" do
+        process(:show, format: :json, params: { id: Room.last.id })
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:ok)
+        expect(json["playlist"]).to be_present
+      end
+    end
+
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
+
+      it "doesn't show the playlist" do
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+        process(:show, format: :json, params: { id: room_a.id })
 
         expect(response).to have_http_status(:unauthorized)
       end
