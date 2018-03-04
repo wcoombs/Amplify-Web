@@ -8,7 +8,7 @@ class SpotifyApiV1
   base_uri "https://api.spotify.com/v1"
 
   def initialize(spotify_account)
-    @access_token = 'BQCY1Is-7XX7JTHx-uMetJYB2sC2rhLD0vG8ilK193nrkuusHmVZjUjYf5WX6MUdEld1LeDsobNmddD9g3roCZB8zLTuOvhTOfxb9_bTnTIbJiNkkTvRmk8WD4klknum3MWliAy_Jz541NKm3SEYzcRlMrIbJZ9fYeds5Q' #spotify_account.access_token
+    @access_token = spotify_account.access_token
   end
 
   def search(query: nil, type: "track,artist")

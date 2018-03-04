@@ -24,6 +24,9 @@ class PlaylistController < ApplicationController
     room = Room.find_by_id(params[:id])
     #save the selected song to the database here
     new_song = Song.create(room: room, title: params[:title], artist: params[:artist])
+    unless new_song.save?
+      flash[:error] = "Error saving song!"
+    end
   end
 
   private
