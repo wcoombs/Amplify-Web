@@ -110,12 +110,12 @@
               });
               return response;
             },
-              url: '/spotify/' + '<%= @room.id %>' + '/search' + '?q={query}',
+              url: '/search?q={query}',
           },
           onSelect: function(event) {
               Rails.ajax({
-                  type: "POST",
-                  url: '/spotify/' + '<%= @room.id %>' + '/suggest?' + 'song_id=' + event.id,
+                  type: "PUT",
+                  url: '/playlist/' + '<%= @room.id %>' + '/suggest?song_id='+event.id,
 
                   success: function(data) {
                       playlistVue.songs = data.playlist;

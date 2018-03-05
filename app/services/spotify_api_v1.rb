@@ -21,7 +21,6 @@ class SpotifyApiV1
   end
 
   def get_track(id)
-    puts id
     send_request(:get, "/tracks/"+id, {})
   end
 
