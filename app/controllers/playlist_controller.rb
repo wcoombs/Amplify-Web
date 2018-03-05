@@ -19,16 +19,6 @@ class PlaylistController < ApplicationController
     end
   end
 
-  def suggest
-    room = Room.find_by_id(params[:id])
-    new_song = Song.create(
-        room: room,
-        title: params[:title],
-        artist: params[:artist],
-        duration: params[:duration],
-        uri: params[:uri])
-  end
-
   private
 
   def playlist_data(songs, voter)

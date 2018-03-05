@@ -14,16 +14,14 @@ Rails.application.routes.draw do
 
   resources :lead_signups, only: [:new, :create]
   resources :voter_signups, only: [:new, :create]
+
   resources :playlist, only: [:show] do
     resources :vote, only: [:update]
   end
 
-  controller :spotify do
-    get '/playlist/:id/search', to: 'spotify#search', as: :search
-  end
-
-  controller :playlist do
-    post '/playlist/:id/suggest', to: 'playlist#suggest', as: :suggest
+  resources :spotify do
+    get :search, to: 'spotify#search'
+    post :suggest, on: :member
   end
 
   get '/spotify_callback', to: 'callback#spotify_callback', as: :spotify_callback

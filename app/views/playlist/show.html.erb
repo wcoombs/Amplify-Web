@@ -103,25 +103,19 @@
               };
               $.each(spotifyResponse.response.tracks.items, function(index, item) {
                   response.results.push({
+                      id: item.id,
                       title: item.name,
                       description: item.artists[0].name,
-                      uri: item.uri,
-                      duration: item.duration_ms,
                   });
               });
               return response;
             },
-              url: '/playlist/' + '<%= @room.id %>' + '/search' + '?q={query}',
+              url: '/spotify/' + '<%= @room.id %>' + '/search' + '?q={query}',
           },
           onSelect: function(event) {
               Rails.ajax({
                   type: "POST",
-                  url: '/playlist/' + '<%= @room.id %>' + '/suggest?' +
-                  'title='+event.title +
-                  '&artist='+event.description +
-                  '&duration='+event.duration +
-                  '&uri='+event.uri, //this does not work currently with special characters
-                  //data: should be able to use JSON.stringify(event) here
+                  url: '/spotify/' + '<%= @room.id %>' + '/suggest?' + 'song_id=' + event.id,
 
                   success: function(data) {
                       playlistVue.songs = data.playlist;
