@@ -6,15 +6,11 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV["DB_NAME"] %>
-  username: <%= ENV["DB_USER"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
+  database: amplify_development
 
 test:
   <<: *default
-  database: <%= ENV["DB_NAME"] %>
-  username: <%= ENV["DB_USER"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
+  database: amplify_test
 
 production:
   <<: *default
