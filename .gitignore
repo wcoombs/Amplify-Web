@@ -26,6 +26,7 @@ config/secrets.yml
 # Ignore specific to MacOS
 .DS_Store
 .idea/
+*.iml
 
 # Ignore local environment setup
 /config/local_env.yml
