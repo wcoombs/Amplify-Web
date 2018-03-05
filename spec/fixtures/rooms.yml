@@ -5,3 +5,7 @@ room_a:
 room_b:
   host: host_b
   room_code: 3141
+
+room_c:
+  host: host_c
+  room_code: 5555

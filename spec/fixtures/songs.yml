@@ -9,3 +9,7 @@ song_a2:
 song_b:
   room: room_b
   title: off the ground
+
+song_c:
+  room: room_c
+  title: havana
