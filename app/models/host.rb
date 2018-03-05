@@ -1,6 +1,7 @@
 class Host < ApplicationRecord
   has_one :room
   has_one :spotify_account
+  has_one :voter
   validates :email, email: true, presence: true, uniqueness: true
   after_create :set_api_token!
 
