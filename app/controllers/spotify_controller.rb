@@ -2,7 +2,7 @@ class SpotifyController < ApplicationController
   before_action :set_api_by_host
 
   def search
-    response = @spotify_api.search(query: params[:q], type: "track,artist")
+    response = @spotify_api.search(query: params[:q])
     render json: {response: response}, status: :ok
   rescue StandardError => error
     puts "oh no everything went horribly wrong!"

@@ -10,12 +10,11 @@ class PlaylistController < ApplicationController
   end
 
   def suggest
-    @spotify_api = @voter.room.host.spotify_account.spotify_api
     track = @spotify_api.get_track(params[:song_id])
     new_song = Song.new
     new_song.format_from_api(track)
     new_song.update!(room: @room)
-    rescue StandardError => error
+  rescue StandardError => error
       Rails.logger.error(error)
   end
 
@@ -42,6 +41,11 @@ class PlaylistController < ApplicationController
     @voter = @room.voters.detect { |v| v.id == session[:voter_id] }
     unless @voter.present?
       flash[:error] = "You must create a user to join this room."
+      return redirect_to root_path
+    end
+    @spotify_api = @voter.room.host.spotify_account.spotify_api
+    unless @spotify_api.present?
+      flash[:error] = "The host must link their Spotify account."
       return redirect_to root_path
     end
   end
