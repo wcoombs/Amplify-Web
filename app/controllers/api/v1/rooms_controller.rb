@@ -15,18 +15,17 @@ module Api
         add_songs(new_room.id)
 
         voter = Voter.create(room: new_room, nickname: 'host')
-        @host.update(voter_id: voter.id)
-
+        @host.update(voter: voter)
 
         respond_to do |format|
-          format.json { render json: { id: new_room.id, room_code: new_room.room_code, voter_id: voter.id }, status: :ok }
+          format.json { render json: { id: new_room.id, room_code: new_room.room_code, voter_id: @host.voter&.id }, status: :ok }
           format.html { head :forbidden }
         end
       end
 
       def index
         respond_to do |format|
-          format.json { render json: { id: @host.room&.id, room_code: @host.room&.room_code, voter_id: @host.voter_id}, status: :ok }
+          format.json { render json: { id: @host.room&.id, room_code: @host.room&.room_code, voter_id: @host.voter&.id}, status: :ok }
           format.html { head :forbidden }
         end
       end
@@ -41,7 +40,7 @@ module Api
       end
 
       def show
-        voter = Voter.find_by_id(@host.voter_id)
+        voter = Voter.find_by_id(@host.voter)
         @playlist_data = playlist_data(@host.room.songs, voter).sort_by{|s| -s[:total_score]}
         respond_to do |format|
           format.json { render json: { playlist: @playlist_data }, status: :ok }

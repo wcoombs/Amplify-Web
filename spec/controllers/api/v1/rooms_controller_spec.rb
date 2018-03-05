@@ -54,7 +54,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
     context "it has a valid api token" do
       before {
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
-        process(:create, format: :json)
       }
 
       it "responds to a json request with a room" do
@@ -145,11 +144,10 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
     context "it has a valid api token" do
       before {
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
-        process(:create, format: :json)
       }
 
       it "shows the playlist" do
-        process(:show, format: :json, params: { id: Room.last.id })
+        process(:show, format: :json, params: { id: 5555 })
 
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:ok)
