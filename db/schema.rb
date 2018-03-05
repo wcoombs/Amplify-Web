@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20180304201507) do
     t.string "api_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "voters_id"
-    t.index ["voters_id"], name: "index_hosts_on_voters_id"
+    t.bigint "voter_id"
+    t.index ["voter_id"], name: "index_hosts_on_voter_id"
   end
 
   create_table "leads", force: :cascade do |t|
@@ -76,5 +76,5 @@ ActiveRecord::Schema.define(version: 20180304201507) do
     t.index ["voter_id"], name: "index_votes_on_voter_id"
   end
 
-  add_foreign_key "hosts", "voters", column: "voters_id"
+  add_foreign_key "hosts", "voters"
 end
