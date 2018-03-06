@@ -2,3 +2,8 @@ vote_a:
   song: song_a
   voter: voter_a
   score: 1
+
+vote_da:
+  song: goodbye
+  voter: voter_da
+  score: 1
