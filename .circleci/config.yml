@@ -26,6 +26,10 @@ jobs:
           name: Move secrets
           command: mv config/secrets.ci.yml config/secrets.yml
 
+      - run:
+          name: Move database
+          command: mv config/database.example.yml config/database.yml
+
       # Download and cache dependencies
       - restore_cache:
           keys:
