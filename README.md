@@ -19,6 +19,12 @@
 - `bundle exec rake db:migrate` to run any outstanding migrations
 - create a local secrets file `config/secrets.yml`, we have an [example secrets file](https://github.com/wcoombs/Amplify-Web/blob/master/config/secrets.example.yml) that can be used as a template, to create your development copy.
   - Use `rake secret` if you want to generate your own `secret_key_base` for your local secrets file
+- You need to sign up for a Spotify Premium account and become a Spotify Developer in order to test and develop locally with the mobile app. That information can be found on the Mobile repository
+- Add the client ID and client secret to both the `development` and `test` environments in the `secrets` file
+  - Be sure to also set the redirect_uri to `"http://127.0.0.1:3000/spotify_callback"` for both `development` and `test`
+  - **If this is being setup for grading purposes, in order to avoid tedious setup with Spotify (and to having to get a Spotify Premium account for grading purposes), please contact Will at william.m.coombs@gmail.com to be given his Spotify Premium account credentials that you can add to your `secrets` file**
+  - **This is necessary in order to fully run and demo the application**
+  - **If you attempt to run the mobile application without Spotify Premium account credentials, you will be notified on the device that a Premium account is required**
 - create a local database file `config/database.yml`, we have an [example database file](https://github.com/wcoombs/Amplify-Web/blob/master/config/database.example.yml) that can be used as a template to create your own copy.
 
 #### After pulling the latest from master always:
