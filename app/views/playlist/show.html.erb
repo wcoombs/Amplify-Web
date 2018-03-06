@@ -18,19 +18,21 @@
         <th>Song</th>
      </tr>
     </thead>
-    <tbody v-for="song in songs">
-      <tr>
-        <td class="center aligned">
-          <div><i class="triangle up icon" @click.prevent=vote(1,song) v-bind:class="{ amplify_color : song.voter_score === 1 }"></i></div>
-          <div>{{ song.total_score }}</div>
-         <div> <i class="triangle down icon vote_icon" @click.prevent=vote(-1,song) v-bind:class="{ amplify_color : song.voter_score === -1 }"></i></div>
-        </td>
-        <td>
-          {{ song.title }}
-          <div class="artist">{{ song.artist }}</div>
-        </td>
-      </tr>
-    </tbody>
+    <transition-group name="fade"
+      <tbody v-for="song in songs">
+        <tr>
+          <td class="center aligned">
+            <div><i class="triangle up icon" @click.prevent=vote(1,song) v-bind:class="{ amplify_color : song.voter_score === 1 }"></i></div>
+            <div>{{ song.total_score }}</div>
+          <div> <i class="triangle down icon vote_icon" @click.prevent=vote(-1,song) v-bind:class="{ amplify_color : song.voter_score === -1 }"></i></div>
+          </td>
+          <td>
+            {{ song.title }}
+            <div class="artist">{{ song.artist }}</div>
+          </td>
+        </tr>
+      </tbody>
+    </transition-group>
   </table>
 </div>
 
