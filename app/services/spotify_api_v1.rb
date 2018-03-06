@@ -20,6 +20,10 @@ class SpotifyApiV1
     send_request(:get, "/me", {})
   end
 
+  def get_track(id)
+    send_request(:get, "/tracks/"+id, {})
+  end
+
   private
 
   def send_request(action, endpoint, options)

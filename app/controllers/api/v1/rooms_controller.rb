@@ -47,6 +47,24 @@ module Api
           format.html {}
         end
       end
+
+      def add_track(id)
+        # ios sends a track id
+        # we add it to the current playlist (getting info from spotify api)
+        room = Room.find(params[:id])
+        spotify_api = @host.spotify_account.spotify_api
+        unless spotify_api.present?
+          flash[:error] = "The host must link their Spotify account."
+          return redirect_to root_path
+        end
+        track = get_track(id)
+        new_song = Song.new
+        new_song.format_from_api(track)
+        new_song.update!(room: room)
+      rescue StandardError => error
+        Rails.logger.error(error)
+      end
+
     end
   end
 end
