@@ -4,6 +4,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_a) { rooms(:room_a) }
   let(:host_a) { hosts(:host_a) }
   let(:host_c) { hosts(:host_c) }
+  let(:room_d) { rooms(:room_d) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -168,4 +169,37 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       end
     end
   end
+
+  describe "GET#next_song" do
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
+      }
+
+      it "sends the locked in and next song" do
+        process(:next_song, format: :json, params: { room_id: room_d.id })
+
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:ok)
+        expect(json["songs"]).to be_present
+        assert_equal(json["songs"][0]["title"], "hello")
+        assert_equal(json["songs"][0]["locked_in"], true)
+        assert_equal(json["songs"][1]["title"], "goodbye")
+      end
+    end
+
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
+
+      it "doesn't send the locked in and next song" do
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+        process(:next_song, format: :json, params: { room_id: room_d.id })
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
 end
