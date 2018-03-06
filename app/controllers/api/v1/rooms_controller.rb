@@ -49,16 +49,15 @@ module Api
       end
 
       def next_song
-        room = Room.find_by_id(params[:playlist_id])
+        room = Room.find_by_id(params[:room_id])
         songs = room.songs
         max_score_song = songs.left_outer_joins(:votes).where(locked_in: false).group(:id).order('sum(votes.score) desc').first
         locked_in_song = songs.find_by(locked_in: true)
 
         respond_to do |format|
-          format.json { render json: {songs: [locked_in_song, max_score_song]}, status: ok }
+          format.json { render json: {songs: [locked_in_song, max_score_song]}, status: :ok }
           format.html {}
         end
-
       end
     end
   end
