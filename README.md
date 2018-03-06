@@ -12,7 +12,7 @@
   - Word of caution when use ruby version managers is that some shells behave in unexpected ways when switching between folders and may unset the current version of ruby being used.  I won't get into further details here about managing that.
 - install `gem install bundle` bundler will manage our projects gem dependencies
 - `npm install` to install yarn (only use npm to install yarn, then use yarn going forward)
-- `yarn install` to install our javascript dependencies 
+- `yarn install` to install our javascript dependencies
 - `brew install postgresql` to install postgres
 - `brew services list` and confirm that *postgresql* is `started`
 - `bundle exec rake db:create` to create our database
@@ -23,10 +23,7 @@
   - **If this is being setup for grading purposes, in order to avoid tedious setup with Spotify (and to having to get a Spotify Premium account for grading purposes), please contact Will at william.m.coombs@gmail.com to be given his Spotify Premium account credentials that you can add to your `secrets` file**
   - **This is necessary in order to fully run and demo the application**
   - **If you attempt to run the mobile application without Spotify Premium account credentials, you will be notified on the device that a Premium account is required**
-- create a local environment file `config/local_env.yml`, we have an [example local env file](https://github.com/wcoombs/Amplify-Web/blob/master/config/local_env.example.yml) that can be used as a template to create your own copy. Fill in the appropriate values for your envrionment according to what the example keys describe.
-  - `DB_NAME` is the name of the development database for your environment
-  - `DB_USER` is your postgresql user
-  - `DB_PASSWORD` is the password for your postgresql user
+- create a local database file `config/database.yml`, we have an [example database file](https://github.com/wcoombs/Amplify-Web/blob/master/config/database.example.yml) that can be used as a template to create your own copy.
 
 #### After pulling the latest from master always:
 - `bundle` to fetch any gems that may have been added to the project
@@ -44,8 +41,6 @@ Or if you want to run webpacker separately (faster for asset compilation, and cs
 
 > \* A quick fix for database errors related to junk data `bundle exec rake db:reset RAILS_ENV=environment` where `environment` is test/development/staging (never production), `db:reset` will drop the database, then run `create`, `schema:load`, and finally `seed` so it's lazy command to run if you do not care whatsoever about the information in the database.
 
-> \* If you get errors related to an unfound database in your name, it is because we are using local environment variables. Simply navigate into the ```config``` directory and create a ```local_env.yml``` file, copy and paste the contents of the ```local_env.example.yml``` file into this created one. If this still doesn't work, just change the password variable to ```DB_PASSWORD: ''```
-
 > \* If you get errors back on the web side asking to update your local database, run the command ```bin/rails db:migrate RAILS_ENV=development```. There should be some tables created if they were missing. Restart the server after the migration is complete.
 
 > \* If you encounter any errors mentioning webpacker, packs, manifest, or any thing javascripty
@@ -53,7 +48,7 @@ Or if you want to run webpacker separately (faster for asset compilation, and cs
 > - If `yarn install` fails make sure you have npm installed and up to date, and then do `npm install` in the project directory.
 
 > \* If you continue to have trouble getting the project to run and are evaluating us for grading purposes, email rob @ robert.laurin89@gmail.com
- 
+
 ## How to Demo the App Locally
 * For ease of use, use your Mac!
 
