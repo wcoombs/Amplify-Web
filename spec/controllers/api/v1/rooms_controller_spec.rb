@@ -177,18 +177,18 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       }
 
       it "sends the locked in and next song" do
-        process(:next_song, format: :json, params: { room_id: room_d.id })
-
-        json = JSON.parse(response.body)
-        first_song = json["songs"].first
-        second_song = json["songs"].second
-        expect(response).to have_http_status(:ok)
-        expect(json["songs"]).to be_present
-        expect(first_song["title"]).to eq("hello")
-        expect(first_song["locked_in"]).to be_truthy
-        expect(second_song["title"]).to eq("goodbye")
-        expect(second_song["locked_in"]).to be_falsey
-      end
+        expect do
+          process(:next_song, format: :json, params: { room_id: room_d.id })
+        end.to change{ Song.count }.by(-1)
+          json = JSON.parse(response.body)
+          first_song = json["songs"].first
+          second_song = json["songs"].second
+          expect(response).to have_http_status(:ok)
+          expect(json["songs"]).to be_present
+          expect(first_song["title"]).to eq("hello")
+          expect(first_song["locked_in"]).to be_truthy
+          expect(second_song["title"]).to eq("goodbye")
+          expect(second_song["locked_in"]).to be_truthy
     end
 
     context "it has a junk token" do
