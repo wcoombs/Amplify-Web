@@ -180,11 +180,14 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         process(:next_song, format: :json, params: { room_id: room_d.id })
 
         json = JSON.parse(response.body)
+        first_song = json["songs"].first
+        second_song = json["songs"].second
         expect(response).to have_http_status(:ok)
         expect(json["songs"]).to be_present
-        assert_equal(json["songs"][0]["title"], "hello")
-        assert_equal(json["songs"][0]["locked_in"], true)
-        assert_equal(json["songs"][1]["title"], "goodbye")
+        expect(first_song["title"]).to eq("hello")
+        expect(first_song["locked_in"]).to be_truthy
+        expect(second_song["title"]).to eq("hi")
+        expect(second_song["locked_in"]).to be_falsey
       end
     end
 
