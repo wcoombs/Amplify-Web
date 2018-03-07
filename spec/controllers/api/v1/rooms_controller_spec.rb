@@ -189,6 +189,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
           expect(first_song["locked_in"]).to be_truthy
           expect(second_song["title"]).to eq("goodbye")
           expect(second_song["locked_in"]).to be_truthy
+      end
     end
 
     context "it has a junk token" do
@@ -204,5 +205,4 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       end
     end
   end
-
 end
