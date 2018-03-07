@@ -186,7 +186,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         expect(json["songs"]).to be_present
         expect(first_song["title"]).to eq("hello")
         expect(first_song["locked_in"]).to be_truthy
-        expect(second_song["title"]).to eq("hi")
+        expect(second_song["title"]).to eq("goodbye")
         expect(second_song["locked_in"]).to be_falsey
       end
     end

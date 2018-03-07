@@ -4,6 +4,16 @@ vote_a:
   score: 1
 
 vote_da:
-  song: goodbye
+  song: song_da
   voter: voter_da
   score: 1
+
+vote_db:
+  song: song_db
+  voter: voter_da
+  score: 1
+
+vote_dc:
+  song: song_dc
+  voter: voter_da
+  score: -1
