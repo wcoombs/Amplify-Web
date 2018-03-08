@@ -10,8 +10,9 @@
   - You can use any ruby version manager of your choosing, we've been using [RVM](https://rvm.io/rvm/install) for local development and I choose to use `RBENV` for the production server (play nicely with capistrano)
   - If you use `RVM` installing ruby 2.5.0 is as simple as `rvm install 2.5.0` and the `rvm use 2.5.0` to set that version.
   - Word of caution when use ruby version managers is that some shells behave in unexpected ways when switching between folders and may unset the current version of ruby being used.  I won't get into further details here about managing that.
-- install `gem install bundle` bundler will manage our projects gem dependencies
-- `npm install` to install yarn (only use npm to install yarn, then use yarn going forward)
+- `gem install bundle` bundler will manage our projects gem dependencies
+- `bundle` or `bundle install` to install the gems needed for the project
+- `npm install` or `npm install yarn` to install yarn (only use npm to install yarn, then use yarn going forward)
 - `yarn install` to install our javascript dependencies
 - `brew install postgresql` to install postgres
 - `brew services list` and confirm that *postgresql* is `started`

@@ -8,14 +8,14 @@ class SpotifyAccountsApi
   base_uri "https://accounts.spotify.com"
 
   def fetch_tokens!(code)
-    response = send_request(:post, "/api/token", {
+    send_request(:post, "/api/token", {
       query: { grant_type: "authorization_code", code: code, redirect_uri: Secrets[:spotify][:redirect_uri] }
     })
   end
 
   def fetch_access_token!(refresh_token)
-    response = send_request(:post, "/api/token", {
-      query: { grand_type: "refresh_token", refresh_token: refresh_token }
+    send_request(:post, "/api/token", {
+      query: { grant_type: "refresh_token", refresh_token: refresh_token }
     })
   end
 

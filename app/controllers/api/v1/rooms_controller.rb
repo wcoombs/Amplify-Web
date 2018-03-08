@@ -31,7 +31,9 @@ module Api
       end
 
       def destroy
-        Room.find(params[:id]).destroy
+        room = Room.find(params[:id])
+        return unless check_room_id!(room)
+        room.destroy
 
         respond_to do |format|
           format.json { render json: { }, status: :ok }
@@ -41,6 +43,7 @@ module Api
 
       def show
         voter = Voter.find_by_id(@host.voter)
+
         @playlist_data = playlist_data(@host.room.songs, voter).sort_by{|s| -s[:total_score]}
         respond_to do |format|
           format.json { render json: { playlist: @playlist_data }, status: :ok }
@@ -50,6 +53,8 @@ module Api
 
       def next_song
         room = Room.find_by_id(params[:room_id])
+        return unless check_room_id!(room)
+
         songs = room.songs
         max_score_song = songs.left_outer_joins(:votes).where(locked_in: false).group(:id).order('sum(votes.score) desc').first
         locked_in_song = songs.find_by(locked_in: true)
@@ -61,6 +66,19 @@ module Api
           format.json { render json: {songs: [locked_in_song, max_score_song]}, status: :ok }
           format.html {}
         end
+      end
+
+      private
+
+      def check_room_id!(room)
+        unless @host.room == room
+          respond_to do |format|
+            format.html { redirect_to(root_url) }
+            format.json { render json: { error: 'This aint your room buddy' }, status: :unauthorized }
+          end
+          return false
+        end
+        true
       end
     end
   end
