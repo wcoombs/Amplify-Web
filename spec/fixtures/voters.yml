@@ -1,3 +1,12 @@
 voter_a:
   room: room_a
   nickname: franklin
+
+voter_c:
+  room: room_c
+  nickname: host
+  host: host_c
+
+voter_da:
+  room: room_d
+  nickname: dave

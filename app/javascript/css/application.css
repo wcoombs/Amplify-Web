@@ -88,9 +88,13 @@ i.icon {
   font-size: 2rem !important;
 }
 
+.flip-list-move {
+  transition: transform 0.5s;
+}
+
 .ui.search .results {
-  overflow-y: auto;
-  max-height: 500px;
+    overflow-y: auto;
+    max-height: 500px;
 }
 
 .ui.basic.small.modal {
