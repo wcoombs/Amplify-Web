@@ -115,7 +115,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
       }
 
-      it "performs to a delete request" do
+      it "performs the delete" do
         expect do
           process(:destroy, format: :json, params: { id: room_a.id })
         end.to change { Room.count }.by(-1)
@@ -124,6 +124,20 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         .and change { Vote.count }.by(-1)
 
         expect(response).to have_http_status(:ok)
+      end
+
+      it "fails to delete a room that doesn't belong to the host" do
+        expect do
+          expect do
+            expect do
+              expect do
+                process(:destroy, format: :json, params: { id: room_d.id })
+              end.to_not change { Room.count }
+            end.to_not change { Song.count }
+          end.to_not change { Voter.count }
+        end.to_not change { Vote.count }
+
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
@@ -173,21 +187,26 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   describe "GET#next_song" do
     context "it has a valid api token" do
       before {
-        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet')
       }
 
       it "sends the locked in and next song" do
         process(:next_song, format: :json, params: { room_id: room_d.id })
 
         json = JSON.parse(response.body)
+        expect(json["songs"]).to be_present
         first_song = json["songs"].first
         second_song = json["songs"].second
-        expect(response).to have_http_status(:ok)
-        expect(json["songs"]).to be_present
         expect(first_song["title"]).to eq("hello")
         expect(first_song["locked_in"]).to be_truthy
         expect(second_song["title"]).to eq("goodbye")
         expect(second_song["locked_in"]).to be_falsey
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "doesn't do anything because thats not your room!" do
+        process(:next_song, format: :json, params: { room_id: room_a.id })
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 

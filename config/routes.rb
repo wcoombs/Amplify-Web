@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         end
         resources :hosts, only: [:create]
 
-        get '/refresher/refresh_access_token', to: 'refresher#access_token' , as: :refresh_access
+        get '/refresher/refresh_access_token', to: 'refresher#refresh_access_token' , as: :refresh_access
       end
     end
   end
