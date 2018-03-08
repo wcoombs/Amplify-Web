@@ -10,7 +10,6 @@ class SpotifyAccount < ApplicationRecord
   end
 
   def refresh_token!
-    return unless token_expired?
     tokens = SpotifyAccountsApi.new.fetch_access_token!(refresh_token)
     set_tokens(tokens)
     save!

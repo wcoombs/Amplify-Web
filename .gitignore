@@ -10,6 +10,7 @@
 # Ignore all logfiles and tempfiles.
 spec/examples.txt
 config/secrets.yml
+config/database.yml
 
 /log/*
 /tmp/*
@@ -27,6 +28,3 @@ config/secrets.yml
 .DS_Store
 .idea/
 *.iml
-
-# Ignore local environment setup
-/config/local_env.yml

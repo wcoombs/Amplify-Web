@@ -6,7 +6,7 @@ module Api
         spotify_account.refresh_token!
 
         respond_to do |format|
-          format.json { render json: { access_token: access_token["access_token"], expires_in: access_token["expires_in"] }, status: :ok }
+          format.json { render json: { access_token: spotify_account["access_token"], expires_in: spotify_account["expires_in"] }, status: :ok }
           format.html { head :forbidden }
         end
       rescue StandardError => error
