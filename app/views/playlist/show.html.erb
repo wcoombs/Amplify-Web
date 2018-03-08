@@ -16,6 +16,9 @@
   </div>
 </div>
 
+  <% if flash[:error] %>
+    <%= render "layouts/flash_messages" %>
+  <% end %>
   <table class="ui celled table inverted unstackable">
     <thead>
       <tr>
@@ -23,7 +26,7 @@
         <th>Song</th>
      </tr>
     </thead>
-    <tbody is="transition-group" name="flip-list">
+    <transition-group is="transition-group" name="flip-list">
       <tr v-for="song in songs" v-bind:key="song.id">
         <td class="center aligned">
           <div><i class="triangle up icon" @click.prevent=vote(1,song) v-bind:class="{ amplify_color : song.voter_score === 1 }"></i></div>
@@ -56,6 +59,11 @@
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function() {
+      setTimeout(function() {
+          $('#flash').remove();
+      }, 5000);
+  });
   const playlistVue = new Vue({
     el: '#show',
     data: {
@@ -105,13 +113,15 @@
               let response = {
                 results: []
               };
-              $.each(spotifyResponse.response.tracks.items, function(index, item) {
-                  response.results.push({
-                      id: item.id,
-                      title: item.name,
-                      description: item.artists[0].name,
+              if(spotifyResponse.response.tracks) {
+                  $.each(spotifyResponse.response.tracks.items, function (index, item) {
+                      response.results.push({
+                          id: item.id,
+                          title: item.name,
+                          description: item.artists[0].name,
+                      });
                   });
-              });
+              }
               return response;
             },
               url: '/search?q={query}',

@@ -26,23 +26,12 @@ class PlaylistController < ApplicationController
     new_song = Song.new
     new_song.format_from_api(track)
     new_song.update!(room: @room)
-  rescue StandardError => error
-      Rails.logger.error(error)
+    rescue StandardError => error
+      puts "Bad response from Spotify API"
+      flash[:error] = "We're having trouble reaching Spotify, please try again later"
   end
 
   private
-
-  def playlist_data(songs)
-    songs.each.map do |song|
-      {
-        id: song.id,
-        title: song.title,
-        artist: song.artist,
-        voter_score: song.voter_vote(@voter)&.score,
-        total_score: song.votes.sum(:score)
-      }
-    end
-  end
 
   def set_room
     @room = Room.find_by_id(params[:id])
