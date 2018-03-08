@@ -26,9 +26,9 @@ class PlaylistController < ApplicationController
     new_song = Song.new
     new_song.format_from_api(track)
     new_song.update!(room: @room)
-    rescue StandardError => error
-      puts "Bad response from Spotify API"
-      flash[:error] = "We're having trouble reaching Spotify, please try again later"
+  rescue StandardError => error
+    puts "Bad response from Spotify API"
+    flash[:error] = "We're having trouble reaching Spotify, please try again later"
   end
 
   private

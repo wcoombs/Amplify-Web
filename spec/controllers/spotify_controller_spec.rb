@@ -7,16 +7,18 @@ RSpec.describe SpotifyController, type: :controller do
     it "returns search results from Spotify" do
       Timecop.freeze(Time.zone.parse("2018-03-06 6:00:00")) do
         VCR.use_cassette("spotify_search_success") do
-          process(:search, method: :get, params: {q: "Toxic"}, session: {voter_id: voter_a.id})
+          process(:search, method: :get, params: { q: "Toxic" }, session: { voter_id: voter_a.id })
         end
       end
       expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json["response"]["tracks"]["items"][0]["name"]).to eq("Toxic")
     end
 
     it "returns an empty response" do
       Timecop.freeze(Time.zone.parse("2018-03-06 6:00:00")) do
         VCR.use_cassette("spotify_search_failure") do
-          process(:search, method: :get, params: {q: "Toxic"}, session: {voter_id: voter_a.id})
+          process(:search, method: :get, params: { q: "Toxic" }, session: { voter_id: voter_a.id })
         end
       end
       json = JSON.parse(response.body)

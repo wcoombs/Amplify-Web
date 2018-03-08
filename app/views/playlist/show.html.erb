@@ -16,9 +16,7 @@
   </div>
 </div>
 
-  <% if flash[:error] %>
-    <%= render "layouts/flash_messages" %>
-  <% end %>
+  <%= render "layouts/flash_messages" %>
   <table class="ui celled table inverted unstackable">
     <thead>
       <tr>
@@ -26,7 +24,7 @@
         <th>Song</th>
      </tr>
     </thead>
-    <transition-group is="transition-group" name="flip-list">
+    <tbody is="transition-group" name="flip-list">
       <tr v-for="song in songs" v-bind:key="song.id">
         <td class="center aligned">
           <div><i class="triangle up icon" @click.prevent=vote(1,song) v-bind:class="{ amplify_color : song.voter_score === 1 }"></i></div>
@@ -42,7 +40,7 @@
   </table>
 </div>
 
-<div class="ui basic small modal">
+<div class="ui basic small modal position-top">
   <div class="amplify_color header">Suggest a song</div>
   <div class="content">
     <div class="ui search">
@@ -54,7 +52,7 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui basic cancel inverted button" onclick="clearField('searchInput')">Cancel</div> <!--amplify_color doesn't work here...?-->
+    <div class="ui basic cancel inverted button" onclick="clearField('searchInput')">Cancel</div>
   </div>
 </div>
 

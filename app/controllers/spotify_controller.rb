@@ -3,10 +3,10 @@ class SpotifyController < ApplicationController
 
   def search
   response = @spotify_api.search(query: params[:q])
-  render json: {response: response}, status: :ok
+  render json: { response: response }, status: :ok
   rescue StandardError => error
     puts "Bad response from Spotify API"
-    render json: {response: {}, status: :ok}
+    render json: { response: {}, status: :ok }
   end
 
   private

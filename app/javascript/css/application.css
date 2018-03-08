@@ -97,6 +97,6 @@ i.icon {
     max-height: 500px;
 }
 
-.ui.basic.small.modal {
-    margin-top: -300px !important;
+.position-top {
+  margin-top: -300px !important;
 }
