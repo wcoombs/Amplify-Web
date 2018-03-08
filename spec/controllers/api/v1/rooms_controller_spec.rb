@@ -200,7 +200,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         expect(first_song["title"]).to eq("hello")
         expect(first_song["locked_in"]).to be_truthy
         expect(second_song["title"]).to eq("goodbye")
-        expect(second_song["locked_in"]).to be_falsey
+        expect(second_song["locked_in"]).to be_truthy
         expect(response).to have_http_status(:ok)
       end
 
