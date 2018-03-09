@@ -5,6 +5,8 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:host_a) { hosts(:host_a) }
   let(:host_c) { hosts(:host_c) }
   let(:room_d) { rooms(:room_d) }
+  let(:room_c) { rooms(:room_c) }
+  let(:room_e) { rooms(:room_e) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -207,6 +209,24 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       it "doesn't do anything because thats not your room!" do
         process(:next_song, format: :json, params: { room_id: room_a.id })
         expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet2')
+      }
+
+      it "sends no songs" do
+        process(:next_song, format: :json, params: { room_id: room_e.id })
+
+        json = JSON.parse(response.body)
+        expect(json["songs"]).to be_present
+        first_song = json["songs"].first
+        second_song = json["songs"].second
+        expect(first_song).to be_nil
+        expect(second_song).to be_nil
+        expect(response).to have_http_status(:ok)
       end
     end
 
