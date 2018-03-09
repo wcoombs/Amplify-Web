@@ -1,5 +1,5 @@
 <div id="show">
-<div class="ui inverted secondary menu">
+<div class="ui fixed inverted secondary menu">
   <div class="header item">
     <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
     Amplify
@@ -38,7 +38,17 @@
       </tr>
     </transition-group>
   </table>
-</div>
+  <div class="ui inverted secondary menu footer">
+    <div class="item">
+      <i class="music icon amplify_color"></i>
+    </div>
+    <div class="item">
+      Now Playing: Toxic
+    </div>
+    <div class="item">
+      Up Next: All Star
+    </div>
+  </div>
 
 <div class="ui basic small modal position-top">
   <div class="amplify_color header">Suggest a song</div>
@@ -54,6 +64,9 @@
   <div class="actions">
     <div class="ui basic cancel inverted button" onclick="clearField('searchInput')">Cancel</div>
   </div>
+</div>
+
+
 </div>
 
 <script type="text/javascript">
