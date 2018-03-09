@@ -96,7 +96,3 @@ i.icon {
     overflow-y: auto;
     max-height: 500px;
 }
-
-.position-top {
-  margin-top: -300px !important;
-}
