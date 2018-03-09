@@ -1,19 +1,22 @@
 <div id="show">
-  <div class="ui inverted menu">
-    <div class="header item">
-      <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
-      Amplify
-    </div>
+<div class="ui inverted secondary menu">
+  <div class="header item">
+    <img class="logo" src="<%= asset_pack_path 'images/inverted-logo.svg' %>">
+    Amplify
+  </div>
+  <div class="item">
+    Room Code:
+    <%= @room.room_code %>
+  </div>
+  <div class="right menu">
     <div class="item">
-      Room Code:
-      <%= @room.room_code %>
-    </div>
-    <div class="right menu">
-      <div class="item">
-        <i class="refresh up icon" @click=reloadPlaylist></i>
-      </div>
+      <i class="add circle icon amplify_color suggest_song"></i>
+      <i class="refresh up icon" @click=reloadPlaylist></i>
     </div>
   </div>
+</div>
+
+  <%= render "layouts/flash_messages" %>
   <table class="ui celled table inverted unstackable">
     <thead>
       <tr>
@@ -37,7 +40,28 @@
   </table>
 </div>
 
+<div class="ui basic small modal position-top">
+  <div class="amplify_color header">Suggest a song</div>
+  <div class="content">
+    <div class="ui search">
+      <div class="ui icon input">
+        <input id="searchInput" class="prompt" type="text" placeholder="Search...">
+        <i class="search icon amplify_color"></i>
+      </div>
+      <div class="results"></div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui basic cancel inverted button" onclick="clearField('searchInput')">Cancel</div>
+  </div>
+</div>
+
 <script type="text/javascript">
+  $(document).ready(function() {
+      setTimeout(function() {
+          $('#flash').remove();
+      }, 5000);
+  });
   const playlistVue = new Vue({
     el: '#show',
     data: {
@@ -72,4 +96,53 @@
       }
     }
   });
+
+  $('.suggest_song').click(function() {
+      $('.ui.basic.small.modal')
+          .modal('setting','scale')
+          .modal({blurring: true})
+          .modal('show');
+  });
+
+  $('.ui.search')
+      .search({
+          apiSettings: {
+            onResponse: function(spotifyResponse) {
+              let response = {
+                results: []
+              };
+              if(spotifyResponse.response.tracks) {
+                  $.each(spotifyResponse.response.tracks.items, function (index, item) {
+                      response.results.push({
+                          id: item.id,
+                          title: item.name,
+                          description: item.artists[0].name,
+                      });
+                  });
+              }
+              return response;
+            },
+              url: '/search?q={query}',
+          },
+          onSelect: function(event) {
+              Rails.ajax({
+                  type: "PUT",
+                  url: '/playlist/' + '<%= @room.id %>' + '/suggest?song_id='+event.id,
+
+                  success: function(data) {
+                      playlistVue.songs = data.playlist;
+                      location.reload();
+                  }
+              });
+          },
+          minCharacters: 2,
+          searchDelay: 1000,
+
+      });
+
+  function clearField(field) {
+      document.getElementById(field).value = "";
+  }
+
+
 </script>
