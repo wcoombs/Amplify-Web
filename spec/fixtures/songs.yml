@@ -13,6 +13,7 @@ song_b:
 song_c:
   room: room_c
   title: havana
+  locked_in: true
 
 song_da:
   room: room_d

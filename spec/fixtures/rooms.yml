@@ -13,3 +13,7 @@ room_c:
 room_d:
   host: host_d
   room_code: 1996
+
+room_e:
+  host: host_e
+  room_code: 1337

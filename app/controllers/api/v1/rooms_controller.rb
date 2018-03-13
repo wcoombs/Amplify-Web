@@ -59,6 +59,13 @@ module Api
         max_score_song = songs.left_outer_joins(:votes).where(locked_in: false).group(:id).order('sum(votes.score) desc').first
         locked_in_song = songs.find_by(locked_in: true)
 
+        if locked_in_song
+          Song.destroy(locked_in_song.id)
+        end
+        if max_score_song
+          max_score_song&.update(locked_in: true)
+        end
+
         respond_to do |format|
           format.json { render json: {songs: [locked_in_song, max_score_song]}, status: :ok }
           format.html {}

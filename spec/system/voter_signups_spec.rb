@@ -24,7 +24,7 @@ RSpec.describe "Voter Signups", :type => :system do
     click_button "Join Room"
 
     expect(page).to have_text("Ooops wrong code bruh")
-    expect(page).to have_current_path("/voter_signups")
+    expect(page).to have_current_path("/voter_signups/new")
   end
 
   it "roomcode is required" do
@@ -34,7 +34,7 @@ RSpec.describe "Voter Signups", :type => :system do
     click_button "Join Room"
 
     expect(page).to have_text("Ooops wrong code bruh")
-    expect(page).to have_current_path("/voter_signups")
+    expect(page).to have_current_path("/voter_signups/new")
   end
 
   it "nickname is required" do
@@ -44,6 +44,6 @@ RSpec.describe "Voter Signups", :type => :system do
     click_button "Join Room"
 
     expect(page).to have_text("Nickname can't be blank")
-    expect(page).to have_current_path("/voter_signups")
+    expect(page).to have_current_path("/voter_signups/new")
   end
 end

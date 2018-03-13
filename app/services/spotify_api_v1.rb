@@ -11,13 +11,17 @@ class SpotifyApiV1
     @access_token = spotify_account.access_token
   end
 
-  def search(query: nil, type: "track")
-    options = { query: { q: query, type: type, market: "US", limit: 1, offset: 1 } }
+  def search(query: nil, type: "track,artist")
+    options = { query: { q: query, type: type, market: "US", limit: 10 } }
     send_request(:get, "/search", options)
   end
 
   def me
     send_request(:get, "/me", {})
+  end
+
+  def get_track(id)
+    send_request(:get, "/tracks/"+id, {})
   end
 
   private
