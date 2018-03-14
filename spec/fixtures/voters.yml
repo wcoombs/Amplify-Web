@@ -10,3 +10,15 @@ voter_c:
 voter_da:
   room: room_d
   nickname: dave
+
+voter_fa:
+  room: room_f
+  nickname: coolkid
+
+voter_fb:
+  room: room_f
+  nickname: yasss
+
+voter_fc:
+  room: room_f
+  nickname: Yolo

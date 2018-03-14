@@ -7,6 +7,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_d) { rooms(:room_d) }
   let(:room_c) { rooms(:room_c) }
   let(:room_e) { rooms(:room_e) }
+  let(:room_f) { rooms(:room_f) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -243,4 +244,37 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       end
     end
   end
+
+   describe "GET#get_voters" do
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet3')
+      }
+
+      it "shows the voter list" do
+        process(:get_voters, format: :json, params: { room_id: room_f.id})
+        json = JSON.parse(response.body)
+        expect(json["voters"]).to be_present
+        first_voter = json["voters"].first
+        second_voter = json["voters"].second
+        third_voter =json["voters"].third
+        expect(first_voter).to eq("coolkid")
+        expect(second_voter).to eq("yasss")
+        expect(third_voter).to eq("Yolo")
+      end
+    end
+
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
+
+      it "doesn't return voters" do
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+        process(:get_voters, format: :json, params: { room_id: room_f.id })
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+   end
 end
