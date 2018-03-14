@@ -35,7 +35,7 @@ module Data_Generator
                   artist: SONG_LIST[song_num][:artist],
                   duration: SONG_LIST[song_num][:duration],
                   uri: SONG_LIST[song_num][:uri],
-                  song_status_id: (i == 3),
+                  song_status_id: (i == 0) ? 2 : 3,
                   room_id:room_id)
     end
   end

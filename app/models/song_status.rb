@@ -1,0 +1,3 @@
+class SongStatus < ApplicationRecord
+
+end

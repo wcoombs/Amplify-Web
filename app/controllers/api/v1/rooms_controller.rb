@@ -44,7 +44,7 @@ module Api
       def show
         voter = Voter.find_by_id(@host.voter)
 
-        @playlist_data = playlist_data(@host.room.songs, voter).sort_by{|s| -s[:total_score]}
+        @playlist_data = playlist_data(@host.room.songs.where(song_status_id: 3), voter).sort_by{|s| -s[:total_score]}
         respond_to do |format|
           format.json { render json: { playlist: @playlist_data }, status: :ok }
           format.html {}

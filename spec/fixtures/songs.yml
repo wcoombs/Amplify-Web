@@ -15,6 +15,11 @@ song_c:
   title: havana
   song_status_id: 2
 
+song_ca:
+  room: room_c
+  title: toxic
+  song_status_id: 3
+
 song_da:
   room: room_d
   title: curr_d
