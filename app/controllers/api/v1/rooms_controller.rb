@@ -56,18 +56,21 @@ module Api
         return unless check_room_id!(room)
 
         songs = room.songs
-        max_score_song = songs.left_outer_joins(:votes).where(locked_in: false).group(:id).order('sum(votes.score) desc').first
-        locked_in_song = songs.find_by(locked_in: true)
-
-        if locked_in_song
-          Song.destroy(locked_in_song.id)
+        played = songs.find_by(song_status_id: 1)
+        curr = songs.find_by(song_status_id: 2)
+        up_next = songs.left_outer_joins(:votes).where(song_status_id: 3).group(:id).order('sum(votes.score) desc').first
+        if played
+          Song.destroy(played.id)
         end
-        if max_score_song
-          max_score_song&.update(locked_in: true)
+        if curr
+          curr.update(song_status_id: 1)
+        end
+        if up_next
+          up_next.update(song_status_id: 2)
         end
 
         respond_to do |format|
-          format.json { render json: {songs: [locked_in_song, max_score_song]}, status: :ok }
+          format.json { render json: {current: curr, next_song: up_next}, status: :ok }
           format.html {}
         end
       end

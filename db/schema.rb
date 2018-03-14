@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305184255) do
+ActiveRecord::Schema.define(version: 20180313195751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20180305184255) do
     t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
+  create_table "song_status", force: :cascade do |t|
+    t.string "song_status"
+  end
+
   create_table "songs", force: :cascade do |t|
     t.bigint "room_id"
     t.string "title"
@@ -45,8 +49,9 @@ ActiveRecord::Schema.define(version: 20180305184255) do
     t.string "artist"
     t.bigint "duration"
     t.string "uri"
-    t.boolean "locked_in", default: false
+    t.bigint "song_status_id"
     t.index ["room_id"], name: "index_songs_on_room_id"
+    t.index ["song_status_id"], name: "index_songs_on_song_status_id"
   end
 
   create_table "spotify_accounts", force: :cascade do |t|

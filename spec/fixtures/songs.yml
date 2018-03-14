@@ -13,17 +13,24 @@ song_b:
 song_c:
   room: room_c
   title: havana
-  locked_in: true
+  song_status_id: 2
 
 song_da:
   room: room_d
-  title: hello
-  locked_in: true
+  title: curr_d
+  song_status_id: 2
 
 song_db:
   room: room_d
-  title: goodbye
+  title: next_d
+  song_status_id: 3
 
 song_dc:
   room: room_d
-  title: hi
+  title: no_votes
+  song_status_id: 3
+
+song_dd:
+  room: room_d
+  title: played
+  song_status_id: 1
