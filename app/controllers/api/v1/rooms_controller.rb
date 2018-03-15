@@ -73,13 +73,15 @@ module Api
       end
 
       def get_voters
-        voters = Voter.where(room_id: params[:room_id]).pluck(:nickname)
 
+        room = Room.find_by_id(params[:room_id])
+        return unless check_room_id!(room)
+
+        voters = room.voters.pluck(:nickname)
         respond_to do |format|
           format.json { render json: { voters: voters }, status: :ok }
           format.html {}
         end
-
       end
 
       private

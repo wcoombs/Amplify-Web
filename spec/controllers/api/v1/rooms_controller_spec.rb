@@ -8,6 +8,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_c) { rooms(:room_c) }
   let(:room_e) { rooms(:room_e) }
   let(:room_f) { rooms(:room_f) }
+  let(:room_g) { rooms(:room_g) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -257,7 +258,7 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         expect(json["voters"]).to be_present
         first_voter = json["voters"].first
         second_voter = json["voters"].second
-        third_voter =json["voters"].third
+        third_voter = json["voters"].third
         expect(first_voter).to eq("coolkid")
         expect(second_voter).to eq("yasss")
         expect(third_voter).to eq("Yolo")
@@ -274,6 +275,30 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         process(:get_voters, format: :json, params: { room_id: room_f.id })
 
         expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+     context "there are no voters in a room" do
+       before {
+         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet3')
+       }
+
+       it "returns an empty voter list" do
+         process(:get_voters, format: :json, params: { room_id: room_g.id })
+         json = JSON.parse(response.body)
+         expect(json["voters"]).to be_blank
+       end
+     end
+
+    context "there is no room for voters to be in" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet3')
+      }
+
+      it "returns an empty voter list" do
+        process(:get_voters, format: :json, params: { room_id: '444' })
+        json = JSON.parse(response.body)
+        expect(json["voters"]).to be_blank
       end
     end
    end
