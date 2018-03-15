@@ -96,7 +96,7 @@
           type: "GET",
           url: '<%= @room.id %>',
           success: function(data) {
-            playlistVue.songs = data.playlist
+            playlistVue.songs = data.playlist.songs
           }
         });
       },
