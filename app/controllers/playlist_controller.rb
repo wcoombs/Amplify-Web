@@ -14,7 +14,19 @@ class PlaylistController < ApplicationController
       flash[:error] = "You must create a user to join this room."
       return redirect_to root_path
     end
-    @playlist_data = {songs: playlist_data(@room.songs.where(song_status_id: 3), voter).sort_by{|s| -s[:total_score]}, current_song: @room.songs.where(song_status_id: 1).first, next_song: @room.songs.where(song_status_id: 2).first}
+    current_song = @room.songs.where(song_status_id: 1).first
+    if current_song
+      current_song = current_song.title
+    else
+      current_song = ""
+    end
+    next_song = @room.songs.where(song_status_id: 2).first
+    if next_song
+      next_song = next_song.title
+    else
+      next_song = ""
+    end
+    @playlist_data = {songs: playlist_data(@room.songs.where(song_status_id: 3), voter).sort_by{|s| -s[:total_score]}, current_song: current_song, next_song: next_song}
     respond_to do |format|
       format.json { render json: { playlist: @playlist_data }, status: :ok }
       format.html {}
