@@ -10,6 +10,8 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:status_currently_playing) { song_statuses(:status_currently_playing) }
   let(:status_up_next) { song_statuses(:status_up_next) }
   let(:status_votable) { song_statuses(:status_votable) }
+  let(:room_f) { rooms(:room_f) }
+  let(:room_g) { rooms(:room_g) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -36,8 +38,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
       it "401s" do
         process(:create, format: :json)
-
-        json = JSON.parse(response.body)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -49,8 +49,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
       it "401s" do
         process(:create, format: :json)
-
-        json = JSON.parse(response.body)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -94,8 +92,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
       it "401s" do
         process(:index, format: :json)
-
-        json = JSON.parse(response.body)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -107,8 +103,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
 
       it "401s" do
         process(:index, format: :json)
-
-        json = JSON.parse(response.body)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -146,15 +140,24 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       end
     end
 
+    context "it doesn't have an api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+      }
+
+      it "401s" do
+        process(:create, format: :json)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
     context "it has a junk token" do
       before {
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
       }
 
       it "does not perform the delete request" do
-        controller.request.env['HTTP_AUTHORIZATION'] = nil
-        process(:destroy, format: :json, params: { id: room_a.id })
-
+        process(:index, format: :json)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -175,15 +178,24 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       end
     end
 
+    context "it doesn't have an api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+      }
+
+      it "401s" do
+        process(:create, format: :json)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
     context "it has a junk token" do
       before {
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
       }
 
       it "doesn't show the playlist" do
-        controller.request.env['HTTP_AUTHORIZATION'] = nil
-        process(:show, format: :json, params: { id: room_a.id })
-
+        process(:index, format: :json)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -233,17 +245,79 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
       end
     end
 
+    context "it doesn't have an api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+      }
+
+      it "401s" do
+        process(:create, format: :json)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
     context "it has a junk token" do
       before {
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
       }
 
       it "doesn't send the locked in and next song" do
-        controller.request.env['HTTP_AUTHORIZATION'] = nil
-        process(:next_song, format: :json, params: { room_id: room_d.id })
-
+        process(:index, format: :json)
         expect(response).to have_http_status(:unauthorized)
       end
     end
   end
+
+   describe "GET#get_voters" do
+    context "it has a valid api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet3')
+      }
+
+      it "shows the voter list" do
+        process(:get_voters, format: :json, params: { room_id: room_f.id})
+        json = JSON.parse(response.body)
+        expect(json["voters"]).to be_present
+        first_voter = json["voters"].first
+        second_voter = json["voters"].second
+        third_voter = json["voters"].third
+        expect(first_voter).to eq("coolkid")
+        expect(second_voter).to eq("yasss")
+        expect(third_voter).to eq("Yolo")
+      end
+      it "no voters, returns an empty voter list" do
+        Voter.delete_all
+        process(:get_voters, format: :json, params: { room_id: room_f.id })
+        json = JSON.parse(response.body)
+        expect(json["voters"]).to be_blank
+      end
+      it "no rooms, returns an empty voter list" do
+        process(:get_voters, format: :json, params: { room_id: '444' })
+        json = JSON.parse(response.body)
+        expect(json["voters"]).to be_blank
+      end
+    end
+
+    context "it doesn't have an api token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = nil
+      }
+
+      it "401s" do
+        process(:create, format: :json)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context "it has a junk token" do
+      before {
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('junktoken')
+      }
+
+      it "401s" do
+        process(:index, format: :json)
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+   end
 end

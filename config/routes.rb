@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       namespace 'v1' do
         resources :rooms, only: [:create, :destroy, :index, :show] do
           get :next_song
+          get :get_voters
         end
         resources :hosts, only: [:create]
 
