@@ -17,3 +17,11 @@ room_d:
 room_e:
   host: host_e
   room_code: 1337
+
+room_f:
+  host: host_f
+  room_code: 9999
+
+room_g:
+  host: host_g
+  room_code: 1010
