@@ -1,0 +1,8 @@
+status_currently_playing:
+  song_status: "currently_playing"
+
+status_up_next:
+  song_status: "up_next"
+
+status_votable:
+  song_status: "votable"

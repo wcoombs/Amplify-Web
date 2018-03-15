@@ -7,6 +7,9 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_d) { rooms(:room_d) }
   let(:room_c) { rooms(:room_c) }
   let(:room_e) { rooms(:room_e) }
+  let(:status_currently_playing) { song_statuses(:status_currently_playing) }
+  let(:status_up_next) { song_statuses(:status_up_next) }
+  let(:status_votable) { song_statuses(:status_votable) }
 
   describe "POST#create" do
     context "it has a valid api token" do
@@ -203,9 +206,9 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         current = json["current"]
         next_song = json["next_song"]
         expect(current["title"]).to eq("curr_d")
-        expect(current["song_status_id"]).to eq(1)
+        expect(current["song_status_id"]).to eq(status_currently_playing.id)
         expect(next_song["title"]).to eq("next_d")
-        expect(next_song["song_status_id"]).to eq(2)
+        expect(next_song["song_status_id"]).to eq(status_up_next.id)
         expect(response).to have_http_status(:ok)
       end
 

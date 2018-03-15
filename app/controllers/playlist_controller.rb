@@ -8,25 +8,18 @@ class PlaylistController < ApplicationController
       flash[:error] = "That room does not exist."
       return redirect_to root_path
     end
-
     voter = @room.voters.detect { |v| v.id == session[:voter_id] }
     unless voter.present?
       flash[:error] = "You must create a user to join this room."
       return redirect_to root_path
     end
-    current_song = @room.songs.where(song_status_id: 1).first
-    if current_song
-      current_song = current_song.title
-    else
-      current_song = ""
-    end
-    next_song = @room.songs.where(song_status_id: 2).first
-    if next_song
-      next_song = next_song.title
-    else
-      next_song = ""
-    end
-    @playlist_data = {songs: playlist_data(@room.songs.where(song_status_id: 3), voter).sort_by{|s| -s[:total_score]}, current_song: current_song, next_song: next_song}
+    current_song = @room.songs.where(song_status_id: song_statuses[:currently_playing]).first
+    current_song = current_song ? current_song.title : ""
+    next_song = @room.songs.where(song_status_id: song_statuses[:up_next]).first
+    next_song = next_song ? next_song.title : ""
+    @playlist_data = {songs: playlist_data(@room.songs.where(song_status_id: song_statuses[:votable]), voter).sort_by{|s| -s[:total_score]},
+                      current_song: current_song,
+                      next_song: next_song}
     respond_to do |format|
       format.json { render json: { playlist: @playlist_data }, status: :ok }
       format.html {}

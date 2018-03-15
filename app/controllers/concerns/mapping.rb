@@ -10,4 +10,10 @@ module Mapping
       }
     end
   end
+
+  def song_statuses
+    return {currently_playing: SongStatus.where(song_status: "currently_playing").first.id,
+                     up_next: SongStatus.where(song_status: "up_next").first.id,
+                     votable: SongStatus.where(song_status: "votable").first.id}
+  end
 end

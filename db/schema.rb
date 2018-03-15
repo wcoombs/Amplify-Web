@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180313195751) do
     t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
-  create_table "song_status", force: :cascade do |t|
+  create_table "song_statuses", force: :cascade do |t|
     t.string "song_status"
   end
 

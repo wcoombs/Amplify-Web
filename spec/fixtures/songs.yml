@@ -1,41 +1,44 @@
 song_a:
   room: room_a
   title: toxic
+  song_status: status_votable
 
 song_a2:
   room: room_a
   title: didn't i
+  song_status: status_votable
 
 song_b:
   room: room_b
   title: off the ground
+  song_status: status_votable
 
 song_c:
   room: room_c
   title: havana
-  song_status_id: 2
+  song_status: status_up_next
 
 song_ca:
   room: room_c
   title: toxic
-  song_status_id: 3
+  song_status: status_votable
 
 song_da:
   room: room_d
   title: curr_d
-  song_status_id: 2
+  song_status: status_up_next
 
 song_db:
   room: room_d
   title: next_d
-  song_status_id: 3
+  song_status: status_votable
 
 song_dc:
   room: room_d
   title: no_votes
-  song_status_id: 3
+  song_status: status_votable
 
 song_dd:
   room: room_d
   title: played
-  song_status_id: 1
+  song_status: status_currently_playing
