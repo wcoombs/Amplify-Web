@@ -5,9 +5,9 @@ Rails.application.routes.draw do
     scope module: 'api' do
       namespace 'v1' do
         resources :rooms, only: [:create, :destroy, :index, :show] do
+          resources :vote, only: [:update]
           get :next_song
           get :get_voters
-          resources :vote, only: [:update]
         end
         resources :hosts, only: [:create]
 

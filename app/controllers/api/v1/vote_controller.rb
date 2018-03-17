@@ -5,7 +5,7 @@ module Api
 
       def update
         voter = Voter.find(params[:voter_id])
-        unless params[:playlist_id].to_i == voter.room_id
+        unless params[:room_id].to_i == voter.room_id
           return render json: {error: "forbidden resource"}, status: :forbidden
         end
 
