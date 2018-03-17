@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :rooms, only: [:create, :destroy, :index, :show] do
           get :next_song
           get :get_voters
+          resources :vote, only: [:update]
         end
         resources :hosts, only: [:create]
 

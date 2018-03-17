@@ -15,6 +15,10 @@ song_c:
   title: havana
   locked_in: true
 
+song_c2:
+  room: room_c
+  title: Delicate
+
 song_da:
   room: room_d
   title: hello
