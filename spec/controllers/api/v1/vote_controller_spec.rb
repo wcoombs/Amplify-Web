@@ -11,7 +11,7 @@ RSpec.describe Api::V1::VoteController, type: :controller do
     context "it has a valid api token" do
 
       before {
-        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken')
+        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('supergreattoken2')
       }
 
       it "allows people to vote on songs in their room" do
@@ -79,6 +79,3 @@ RSpec.describe Api::V1::VoteController, type: :controller do
     end
   end
 end
-
-
-
