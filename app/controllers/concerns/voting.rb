@@ -5,7 +5,6 @@ module Voting
     vote_value = 1 if vote_value >= 1
     vote_value = -1 if vote_value <= -1
 
-
     vote = Vote.find_or_initialize_by(voter: voter, song: song)
     vote.update(score: vote_value)
   end
