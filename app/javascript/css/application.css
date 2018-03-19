@@ -96,3 +96,9 @@ i.icon {
     overflow-y: auto;
     max-height: 500px;
 }
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
