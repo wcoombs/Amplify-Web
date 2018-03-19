@@ -6,7 +6,8 @@ module Mapping
           title: song.title,
           artist: song.artist,
           voter_score: song.voter_vote(voter)&.score,
-          total_score: song.votes.sum(:score)
+          total_score: song.votes.sum(:score),
+          song_status: song.song_status_id
       }
     end
   end

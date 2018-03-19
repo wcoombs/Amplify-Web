@@ -7,6 +7,7 @@ class Song < ApplicationRecord
   validates :artist, presence: true
   validates :duration, presence: true
   validates :uri, presence: true
+  validates :song_status_id, presence: true
 
   def voter_vote(voter)
     votes.where(voter_id: voter.id).first
