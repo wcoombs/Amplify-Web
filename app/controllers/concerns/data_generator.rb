@@ -31,7 +31,6 @@ module Data_Generator
 
   def add_songs(room_id)
     for i in 0..4
-      binding.pry
       song_num = rand(SONG_LIST.length)
       song = Song.create(title: SONG_LIST[song_num][:title],
                          artist: SONG_LIST[song_num][:artist],

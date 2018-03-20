@@ -52,7 +52,6 @@ module Api
       end
 
       def next_song
-        binding.pry
         room = Room.find_by_id(params[:room_id])
         return unless check_room_id!(room)
 

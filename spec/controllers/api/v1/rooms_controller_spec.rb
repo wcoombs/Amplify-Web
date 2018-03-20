@@ -7,9 +7,6 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
   let(:room_d) { rooms(:room_d) }
   let(:room_c) { rooms(:room_c) }
   let(:room_e) { rooms(:room_e) }
-  let(:status_currently_playing) { song_statuses(:status_currently_playing) }
-  let(:status_up_next) { song_statuses(:status_up_next) }
-  let(:status_votable) { song_statuses(:status_votable) }
   let(:room_f) { rooms(:room_f) }
   let(:room_g) { rooms(:room_g) }
 
@@ -218,9 +215,9 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         current = json["current"]
         next_song = json["next_song"]
         expect(current["title"]).to eq("curr_d")
-        expect(current["song_status_id"]).to eq(status_currently_playing.id)
+        expect(current["song_status"]).to eq('currently_playing')
         expect(next_song["title"]).to eq("next_d")
-        expect(next_song["song_status_id"]).to eq(status_up_next.id)
+        expect(next_song["song_status"]).to eq('up_next')
         expect(response).to have_http_status(:ok)
       end
 
