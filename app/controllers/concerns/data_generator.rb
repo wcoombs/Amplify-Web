@@ -31,13 +31,16 @@ module Data_Generator
 
   def add_songs(room_id)
     for i in 0..4
+      binding.pry
       song_num = rand(SONG_LIST.length)
-      Song.create(title: SONG_LIST[song_num][:title],
-                  artist: SONG_LIST[song_num][:artist],
-                  duration: SONG_LIST[song_num][:duration],
-                  uri: SONG_LIST[song_num][:uri],
-                  song_status: (i == 0) ? Song.up_next : Song.votable,
-                  room_id: room_id)
+      song = Song.create(title: SONG_LIST[song_num][:title],
+                         artist: SONG_LIST[song_num][:artist],
+                         duration: SONG_LIST[song_num][:duration],
+                         uri: SONG_LIST[song_num][:uri],
+                         room_id: room_id)
+      if i == 0
+        song.update(song_status: Song::UP_NEXT_STATUS)
+      end
     end
   end
 end

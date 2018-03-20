@@ -44,7 +44,7 @@ module Api
       def show
         voter = Voter.find_by_id(@host.voter)
 
-        @playlist_data = playlist_data(@host.room.songs.where(song_status: Song.votable), voter).sort_by{|s| -s[:total_score]}
+        @playlist_data = playlist_data(@host.room.songs.votable, voter).sort_by{|s| -s[:total_score]}
         respond_to do |format|
           format.json { render json: { playlist: @playlist_data }, status: :ok }
           format.html {}
@@ -52,21 +52,22 @@ module Api
       end
 
       def next_song
+        binding.pry
         room = Room.find_by_id(params[:room_id])
         return unless check_room_id!(room)
 
         songs = room.songs
-        played = songs.where(song_status: Song.currently_playing).first
-        curr = songs.where(song_status: Song.up_next).first
-        up_next = songs.left_outer_joins(:votes).where(song_status: Song.votable).group(:id).order('sum(votes.score) desc').first
+        played = songs.currently_playing.first
+        curr = songs.up_next.first
+        up_next = songs.left_outer_joins(:votes).where(song_status: Song::VOTABLE_STATUS).group(:id).order('sum(votes.score) desc').first
         if played
           Song.destroy(played.id)
         end
         if curr
-          curr.update(song_status: Song.currently_playing)
+          curr.update(song_status: Song::CURRENTLY_PLAYING_STATUS)
         end
         if up_next
-          up_next.update(song_status: Song.up_next)
+          up_next.update(song_status: Song::UP_NEXT_STATUS)
         end
 
         respond_to do |format|

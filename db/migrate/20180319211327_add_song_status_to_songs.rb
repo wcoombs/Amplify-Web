@@ -3,7 +3,7 @@ class AddSongStatusToSongs < ActiveRecord::Migration[5.1]
     execute <<-SQL
     CREATE TYPE song_status AS ENUM ('currently_playing', 'up_next', 'votable');
     SQL
-    add_column :songs, :song_status, :song_status
+    add_column :songs, :song_status, :song_status, default: 'votable'
   end
 
   def down

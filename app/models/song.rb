@@ -8,10 +8,14 @@ class Song < ApplicationRecord
   validates :uri, presence: true
   validates :song_status, presence: true
 
+  CURRENTLY_PLAYING_STATUS = 'currently_playing'
+  UP_NEXT_STATUS = 'up_next'
+  VOTABLE_STATUS = 'votable'
+
   enum song_status: {
-      currently_playing:    'currently_playing',
-      up_next:              'up_next',
-      votable:              'votable'
+      currently_playing:    CURRENTLY_PLAYING_STATUS,
+      up_next:              UP_NEXT_STATUS,
+      votable:              VOTABLE_STATUS
   }
 
   def voter_vote(voter)
@@ -23,7 +27,6 @@ class Song < ApplicationRecord
         title: track["name"],
         artist: track["artists"][0]["name"],
         duration: track["duration_ms"],
-        uri: track["uri"],
-        song_status: Song.votable)
+        uri: track["uri"])
   end
 end
