@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313195751) do
+ActiveRecord::Schema.define(version: 20180319211327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,22 +37,8 @@ ActiveRecord::Schema.define(version: 20180313195751) do
     t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
-  create_table "song_statuses", force: :cascade do |t|
-    t.string "song_status"
-  end
-
-  create_table "songs", force: :cascade do |t|
-    t.bigint "room_id"
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "artist"
-    t.bigint "duration"
-    t.string "uri"
-    t.bigint "song_status_id"
-    t.index ["room_id"], name: "index_songs_on_room_id"
-    t.index ["song_status_id"], name: "index_songs_on_song_status_id"
-  end
+# Could not dump table "songs" because of following StandardError
+#   Unknown type 'song_status' for column 'song_status'
 
   create_table "spotify_accounts", force: :cascade do |t|
     t.bigint "host_id"
