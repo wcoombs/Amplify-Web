@@ -12,12 +12,6 @@ class Song < ApplicationRecord
   UP_NEXT_STATUS = 'up_next'
   VOTABLE_STATUS = 'votable'
 
-  enum song_status: {
-      currently_playing:    CURRENTLY_PLAYING_STATUS,
-      up_next:              UP_NEXT_STATUS,
-      votable:              VOTABLE_STATUS
-  }
-
   def voter_vote(voter)
     votes.where(voter_id: voter.id).first
   end
