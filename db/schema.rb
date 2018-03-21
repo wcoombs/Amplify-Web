@@ -78,5 +78,5 @@ ActiveRecord::Schema.define(version: 20180319211327) do
     t.index ["song_id"], name: "index_votes_on_song_id"
     t.index ["voter_id"], name: "index_votes_on_voter_id"
   end
-
+  
 end

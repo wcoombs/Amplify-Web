@@ -23,6 +23,10 @@ song_ca:
   title: toxic
   song_status: 'votable'
 
+song_c2:
+  room: room_c
+  title: Delicate
+
 song_da:
   room: room_d
   title: curr_d
