@@ -32,14 +32,11 @@ module Data_Generator
   def add_songs(room_id)
     for i in 0..4
       song_num = rand(SONG_LIST.length)
-      song = Song.create(title: SONG_LIST[song_num][:title],
-                         artist: SONG_LIST[song_num][:artist],
-                         duration: SONG_LIST[song_num][:duration],
-                         uri: SONG_LIST[song_num][:uri],
-                         room_id: room_id)
-      if i == 0
-        song.update(song_status: Song::UP_NEXT_STATUS)
-      end
+      Song.create(title: SONG_LIST[song_num][:title],
+                  artist: SONG_LIST[song_num][:artist],
+                  duration: SONG_LIST[song_num][:duration],
+                  uri: SONG_LIST[song_num][:uri],
+                  room_id: room_id)
     end
   end
 end
