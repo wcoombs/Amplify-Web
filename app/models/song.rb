@@ -8,9 +8,9 @@ class Song < ApplicationRecord
   validates :uri, presence: true
   validates :song_status, presence: true
 
-  CURRENTLY_PLAYING_STATUS = 'currently_playing'
-  UP_NEXT_STATUS = 'up_next'
-  VOTABLE_STATUS = 'votable'
+  CURRENTLY_PLAYING_STATUS = 'currently_playing'.freeze
+  UP_NEXT_STATUS = 'up_next'.freeze
+  VOTABLE_STATUS = 'votable'.freeze
 
   def voter_vote(voter)
     votes.where(voter_id: voter.id).first
