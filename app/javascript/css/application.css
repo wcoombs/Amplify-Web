@@ -115,3 +115,7 @@ i.icon {
 .item.left {
   justify-content: left !important;
 }
+
+.margin-top-5 {
+  margin-top: 5rem !important;
+}
