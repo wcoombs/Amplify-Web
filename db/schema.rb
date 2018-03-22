@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305184255) do
+ActiveRecord::Schema.define(version: 20180319211327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20180305184255) do
     t.string "artist"
     t.bigint "duration"
     t.string "uri"
-    t.boolean "locked_in", default: false
+    t.string "song_status", default: "votable"
     t.index ["room_id"], name: "index_songs_on_room_id"
   end
 

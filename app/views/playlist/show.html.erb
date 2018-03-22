@@ -40,6 +40,17 @@
   </table>
 </div>
 
+<div class="ui inverted secondary two item menu footer">
+  <div class="item left">
+    <i class="music icon amplify_color"> </i>
+    <div><%= @playlist_data[:current_song] %></div>
+  </div>
+  <div class="item left">
+    <i class="fast forward icon amplify_color"> </i>
+    <div><%= @playlist_data[:next_song] %></div>
+  </div>
+</div>
+
 <div class="ui basic small modal position-top">
   <div class="amplify_color header">Suggest a song</div>
   <div class="content">
@@ -65,7 +76,7 @@
   const playlistVue = new Vue({
     el: '#show',
     data: {
-      songs: <%= @playlist_data.to_json.html_safe %>
+      songs: <%= @playlist_data[:songs].to_json.html_safe %>
     },
     methods: {
       vote: function(value, song) {
@@ -85,7 +96,7 @@
           type: "GET",
           url: '<%= @room.id %>',
           success: function(data) {
-            playlistVue.songs = data.playlist
+            playlistVue.songs = data.playlist.songs
           }
         });
       },

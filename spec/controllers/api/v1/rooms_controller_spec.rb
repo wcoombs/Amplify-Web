@@ -204,17 +204,20 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials('besttokenyet')
       }
 
-      it "sends the locked in and next song" do
-        process(:next_song, format: :json, params: { room_id: room_d.id })
+      it "sends the curr song and up next song" do
+        expect do
+          process(:next_song, format: :json, params: { room_id: room_d.id })
+        end.to change { Song.count }.by(-1)
 
         json = JSON.parse(response.body)
-        expect(json["songs"]).to be_present
-        first_song = json["songs"].first
-        second_song = json["songs"].second
-        expect(first_song["title"]).to eq("hello")
-        expect(first_song["locked_in"]).to be_truthy
-        expect(second_song["title"]).to eq("goodbye")
-        expect(second_song["locked_in"]).to be_truthy
+        expect(json["current"]).to be_present
+        expect(json["next_song"]).to be_present
+        current = json["current"]
+        next_song = json["next_song"]
+        expect(current["title"]).to eq("curr_d")
+        expect(current["song_status"]).to eq('currently_playing')
+        expect(next_song["title"]).to eq("next_d")
+        expect(next_song["song_status"]).to eq('up_next')
         expect(response).to have_http_status(:ok)
       end
 
@@ -233,11 +236,8 @@ RSpec.describe Api::V1::RoomsController, type: :controller do
         process(:next_song, format: :json, params: { room_id: room_e.id })
 
         json = JSON.parse(response.body)
-        expect(json["songs"]).to be_present
-        first_song = json["songs"].first
-        second_song = json["songs"].second
-        expect(first_song).to be_nil
-        expect(second_song).to be_nil
+        expect(json["current"]).to be_nil
+        expect(json["next_song"]).to be_nil
         expect(response).to have_http_status(:ok)
       end
     end

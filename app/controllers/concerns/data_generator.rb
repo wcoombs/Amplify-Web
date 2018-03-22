@@ -1,5 +1,6 @@
 module Data_Generator
   extend ActiveSupport::Concern
+  include Mapping
 
   SONG_LIST = [
       {title: "Toxic", artist: "Britney Spears", duration: "198800", uri: "spotify:track:6I9VzXrHxO9rA9A5euc8Ak"},
@@ -35,8 +36,7 @@ module Data_Generator
                   artist: SONG_LIST[song_num][:artist],
                   duration: SONG_LIST[song_num][:duration],
                   uri: SONG_LIST[song_num][:uri],
-                  locked_in: (i == 0),
-                  room_id:room_id)
+                  room_id: room_id)
     end
   end
 end

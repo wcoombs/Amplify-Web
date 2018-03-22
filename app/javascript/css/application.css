@@ -103,6 +103,19 @@ i.icon {
   width: 100%;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  margin: 0 !important;
+}
+
+.item.left {
+  justify-content: left !important;
+}
+
 .margin-top-5 {
   margin-top: 5rem !important;
 }
