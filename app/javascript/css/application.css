@@ -116,6 +116,7 @@ i.icon {
   justify-content: left !important;
 }
 
-.margin-top-5 {
+.margin-top-bottom-5 {
   margin-top: 5rem !important;
+  margin-bottom: 5rem !important;
 }
